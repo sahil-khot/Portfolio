@@ -1,404 +1,925 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sahil Khot — Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Sora:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <!-- NAV -->
-    <nav>
-      <a href="#" class="nav-logo">Sahil Khot<span>.</span></a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahil Khot | Full-Stack Developer &amp; Computer Engineering Student</title>
+  <meta name="description" content="Portfolio of Sahil Khot — 4th-Year Computer Engineering student at Vidya Pratishthan's Kamalnayan Bajaj Institute of Engineering and Technology, Baramati, MERN full-stack developer with internship experience, 400+ LeetCode problems solved in Java, and applied AI/ML projects." />
+  
+  <!-- Open Graph Metadata -->
+  <meta property="og:title" content="Sahil Khot | Full-Stack Developer &amp; Computer Engineering Student" />
+  <meta property="og:description" content="Full-stack MERN developer, problem solver with 400+ LeetCode problems, and builder of practical web applications including SolarSense AI and Project Match." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="Profile.jpg" />
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- STICKY NAVIGATION -->
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="#home" class="nav-brand">
+        Sahil Khot<span class="nav-brand-dot">.</span>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#dsa" class="nav-link">DSA</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
-    </nav>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-inner">
-          <div>
-            <div class="hero-badge">
-              TY B.Tech Computer Science — VPKBIET Baramati
-            </div>
-            <h1 class="hero-title">
-              Hi, I'm <span>Sahil Khot</span><br />Full-Stack Developer
-            </h1>
-            <p class="hero-desc">
-              A passionate computer science student who loves building web
-              applications. I work across the full stack — from designing clean
-              UIs to connecting backends and databases.
-            </p>
-            <div class="hero-btns">
-              <a href="#projects" class="btn btn-blue">View My Projects</a>
-              <a href="#contact" class="btn btn-ghost">Contact Me</a>
-            </div>
-            <div class="hero-stats">
-              <div>
-                <div class="stat-num">2+</div>
-                <div class="stat-label">Projects Built</div>
-              </div>
-              <div>
-                <div class="stat-num">6+</div>
-                <div class="stat-label">Technologies</div>
-              </div>
-              <div>
-                <div class="stat-num">TY</div>
-                <div class="stat-label">CS Student</div>
-              </div>
-            </div>
-          </div>
-          <div class="profile-img">
-            <img src="Profile.jpg" alt="Sahil Khot" />
-          </div>
-        </div>
+      <div class="nav-actions">
+        <a href="Sahil_Khot_Resume.pdf" target="_blank" download="Sahil_Khot_Resume.pdf" class="btn btn-secondary btn-sm" aria-label="Download Sahil Khot Resume PDF">
+          <svg class="icon-stroke" viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Resume
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+          <svg class="icon-stroke" viewBox="0 0 24 24">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
-    </section>
+    </div>
+  </nav>
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="container">
-        <div class="section-tag">About Me</div>
-        <h2>Who I Am</h2>
-        <p class="section-sub">
-          A little about my background, skills, and where I'm headed.
-        </p>
-        <div class="about-grid">
-          <div class="about-text reveal">
-            <p>
-              I'm <strong>Sahil Khot</strong>, a Third Year Computer Science
-              student at <strong>VPKBIET Baramati</strong>. I enjoy building
-              full-stack web applications and learning how things work
-              end-to-end — from a user clicking a button to data being saved in
-              a database.
-            </p>
-            <p>
-              I have a solid foundation in
-              <strong>HTML, CSS, JavaScript, and React.js</strong> on the
-              frontend, and core knowledge of
-              <strong>Node.js, Express, MongoDB, and MySQL</strong> on the
-              backend.
-            </p>
-            <p>
-              I'm actively looking for internship opportunities and real-world
-              projects to grow my skills and gain hands-on experience.
-            </p>
+  <!-- 1. HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-status-tag">
+            <span class="status-dot"></span>
+            4th-Year Computer Engineering Student
+          </div>
 
-            <div class="skills-label">Frontend</div>
-            <div class="tags">
-              <span class="tag">HTML5</span>
-              <span class="tag">CSS3</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">React.js</span>
-            </div>
+          <h1 class="hero-title">Hi, I'm Sahil Khot.</h1>
+          <div class="hero-role">Computer Engineering Student &bull; Full-Stack Developer</div>
 
-            <div class="skills-label" style="margin-top: 1rem">
-              Backend & Database
-            </div>
-            <div class="tags">
-              <span class="tag">Node.js</span>
-              <span class="tag">Express.js</span>
-              <span class="tag">MongoDB</span>
-              <span class="tag">MySQL</span>
+          <p class="hero-desc">
+            I build practical full-stack applications with React, Node.js and MongoDB, combining software engineering, problem solving and AI-driven features to solve real-world problems.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              View Projects
+              <svg class="icon-stroke" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="Sahil_Khot_Resume.pdf" target="_blank" download="Sahil_Khot_Resume.pdf" class="btn btn-secondary">
+              <svg class="icon-stroke" viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download Resume
+            </a>
+
+            <!-- Secondary Links -->
+            <div class="hero-social-links">
+              <a href="https://github.com/sahil-khot" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub Profile">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                GitHub
+              </a>
+              <a href="https://www.linkedin.com/in/sahil-khot-/" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn Profile">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                LinkedIn
+              </a>
+              <a href="https://leetcode.com/u/Sahil_Khot_18/" target="_blank" rel="noopener noreferrer" class="social-link" title="LeetCode Profile">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .666-1.607 2.6 2.6 0 0 1 .614-.528l3.85-4.12 5.4-5.783a1.365 1.365 0 0 0-.003-1.93 1.372 1.372 0 0 0-.97-.403z"/>
+                  <path d="M9.833 10.924a1.377 1.377 0 0 0-1.947 1.948l3.626 3.626a1.378 1.378 0 0 0 1.95-.002 1.38 1.38 0 0 0 0-1.948l-3.629-3.624z"/>
+                </svg>
+                LeetCode
+              </a>
             </div>
           </div>
 
-          <div class="reveal" style="transition-delay: 0.1s">
-            <div class="info-card">
-              <div class="info-card-header">
-                <div class="info-card-title">Quick Info</div>
-              </div>
-              <div class="info-item">
-                <div class="info-icon">🎓</div>
-                <div>
-                  <div class="info-label">Education</div>
-                  <div class="info-val">
-                    TY B.Tech Computer Science<br />VPKBIET Baramati
-                  </div>
-                </div>
-              </div>
-              <div class="info-item">
-                <div class="info-icon">💼</div>
-                <div>
-                  <div class="info-label">Status</div>
-                  <div class="info-val">Open to Internships & Freelance</div>
-                </div>
-              </div>
-              <div class="info-item">
-                <div class="info-icon">📍</div>
-                <div>
-                  <div class="info-label">Location</div>
-                  <div class="info-val">Baramati, Maharashtra, India</div>
-                </div>
-              </div>
-              <div class="info-item">
-                <div class="info-icon">🐙</div>
-                <div>
-                  <div class="info-label">GitHub</div>
-                  <div class="info-val">
-                    <a
-                      href="https://github.com/sahil-khot"
-                      target="_blank"
-                      >sahil-khot</a
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="info-item">
-                <div class="info-icon">🔗</div>
-                <div>
-                  <div class="info-label">LinkedIn</div>
-                  <div class="info-val">
-                    <a
-                      href="https://www.linkedin.com/in/sahil-khot-/"
-                      target="_blank"
-                      >sahil-khot-</a
-                    >
-                  </div>
-                </div>
-              </div>
+          <!-- Credibility Indicators -->
+          <div class="credibility-strip">
+            <div class="cred-item">
+              <span class="cred-value">9.18</span>
+              <span class="cred-label">B.Tech CGPA</span>
+            </div>
+            <div class="cred-item">
+              <span class="cred-value">400+</span>
+              <span class="cred-label">LeetCode Problems</span>
+            </div>
+            <div class="cred-item">
+              <span class="cred-value">MERN</span>
+              <span class="cred-label">Stack Intern</span>
+            </div>
+            <div class="cred-item">
+              <span class="cred-value">98.62</span>
+              <span class="cred-label">MHT-CET Percentile</span>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="container">
-        <div class="section-tag">My Work</div>
-        <h2>Projects</h2>
-        <p class="section-sub">
-          Things I've built while learning and exploring full-stack development.
+        <div class="hero-visual">
+          <div class="profile-frame">
+            <img src="Profile.jpg" alt="Sahil Khot — Computer Engineering student and full-stack developer" width="260" height="260" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. FEATURED PROJECTS SECTION (Primary Visual Centerpiece) -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">01. Engineering Work</span>
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">
+          Full-stack web applications built end-to-end with modern frameworks, clean APIs, and practical AI/ML integrations.
         </p>
-        <div class="projects-grid" style="grid-template-columns: 1fr">
-          <div class="project-card reveal" style="max-width: 480px">
-            <div class="project-thumb t1">🌡️</div>
-            <div class="project-body">
-              <div class="project-type">Frontend · Utility Tool</div>
-              <div class="project-name">Temperature Converter</div>
-              <p class="project-desc">
-                A clean, easy-to-use temperature converter that converts between
-                Celsius, Fahrenheit, and Kelvin instantly. Built with vanilla
-                HTML, CSS, and JavaScript.
+      </div>
+
+      <div class="projects-showcase">
+        <!-- 1. SolarSense AI -->
+        <article class="project-card" id="project-solarsense">
+          <div class="project-preview-wrap" onclick="openModal('solarsense')" tabindex="0" role="button" aria-label="Open SolarSense AI project details">
+            <img src="solarsense-preview.png" alt="SolarSense AI Dashboard screenshot showcasing electricity consumption insights and solar recommendation simulator" class="project-preview-img" loading="lazy" />
+            <div class="project-preview-overlay">
+              <span class="overlay-badge">
+                <svg class="icon-stroke" viewBox="0 0 24 24">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                View Project Details
+              </span>
+            </div>
+          </div>
+
+          <div class="project-info-wrap">
+            <div class="project-meta-top">
+              <span class="project-category-tag">Primary Featured Project &bull; Clean Energy Analytics</span>
+              <h3 class="project-title">SolarSense AI</h3>
+              <p class="project-desc-short">
+                An AI-assisted solar analysis platform that analyzes electricity usage and helps users evaluate solar system size, investment, savings, subsidy impact and payback.
               </p>
-              <div class="project-techs">
-                <span class="tech">HTML5</span>
-                <span class="tech">CSS3</span>
-                <span class="tech">JavaScript</span>
+
+              <div class="tech-chips-bar">
+                <span class="tech-chip">React.js</span>
+                <span class="tech-chip">Node.js</span>
+                <span class="tech-chip">Express.js</span>
+                <span class="tech-chip">MongoDB</span>
+                <span class="tech-chip">AI/ML</span>
               </div>
-              <div
-                style="
-                  display: flex;
-                  gap: 0.75rem;
-                  margin-top: 0.75rem;
-                  flex-wrap: wrap;
-                "
-              >
-                <a
-                  href="https://sahilkhot1152005-droid.github.io/Temperature-Converter/"
-                  target="_blank"
-                  class="project-link"
-                  >Live Demo →</a
-                >
-                <a
-                  href="https://github.com/sahilkhot1152005-droid"
-                  target="_blank"
-                  class="project-link"
-                  style="color: var(--muted)"
-                  >GitHub →</a
-                >
+
+              <div class="feature-summary-title">Key Features</div>
+              <ul class="feature-summary-list">
+                <li>Electricity bill analysis</li>
+                <li>Solar system recommendation</li>
+                <li>What-if solar simulator</li>
+                <li>Financial savings/payback analysis</li>
+                <li>AI-assisted recommendations</li>
+              </ul>
+            </div>
+
+            <div class="project-actions-bar">
+              <a href="https://solar-sense-ai-client.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                Live Demo ↗
+              </a>
+              <a href="https://github.com/sahil-khot/SolarSense-AI" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                GitHub ↗
+              </a>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="openModal('solarsense')">
+                Details
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Project Match -->
+        <article class="project-card" id="project-match">
+          <div class="project-preview-wrap" onclick="openModal('projectmatch')" tabindex="0" role="button" aria-label="Open Project Match project details">
+            <img src="projectmatch-preview.png" alt="Project Match platform screenshot showing student collaboration directory and project listings" class="project-preview-img" loading="lazy" />
+            <div class="project-preview-overlay">
+              <span class="overlay-badge">
+                <svg class="icon-stroke" viewBox="0 0 24 24">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                View Project Details
+              </span>
+            </div>
+          </div>
+
+          <div class="project-info-wrap">
+            <div class="project-meta-top">
+              <span class="project-category-tag">Major Featured Project &bull; Collaboration Platform</span>
+              <h3 class="project-title">Project Match</h3>
+              <p class="project-desc-short">
+                A student collaboration platform that helps students discover teammates, mentors and projects using profile data, filtering and recommendation workflows.
+              </p>
+
+              <div class="tech-chips-bar">
+                <span class="tech-chip">React.js</span>
+                <span class="tech-chip">Vite</span>
+                <span class="tech-chip">Tailwind CSS</span>
+                <span class="tech-chip">Node.js</span>
+                <span class="tech-chip">Express.js</span>
+                <span class="tech-chip">MongoDB</span>
               </div>
+
+              <div class="feature-summary-title">Key Features</div>
+              <ul class="feature-summary-list">
+                <li>Student discovery</li>
+                <li>ML-based teammate recommendation</li>
+                <li>Mentor discovery</li>
+                <li>Project/team formation</li>
+                <li>Messaging and applications</li>
+              </ul>
+            </div>
+
+            <div class="project-actions-bar">
+              <a href="https://project-match-client-virid.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                Live Demo ↗
+              </a>
+              <a href="https://github.com/sahil-khot/Project-Match" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                GitHub ↗
+              </a>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="openModal('projectmatch')">
+                Details
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. EXPERIENCE SECTION -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">02. Work History</span>
+        <h2 class="section-title">Experience</h2>
+        <p class="section-subtitle">
+          Software engineering internship delivering full-stack application features.
+        </p>
+      </div>
+
+      <div class="experience-container">
+        <div class="exp-card-single">
+          <div class="exp-header-row">
+            <div>
+              <h3 class="exp-role-name">MERN Stack Intern</h3>
+              <div class="exp-company-location">Anvistar &bull; Pune, India</div>
+            </div>
+            <span class="exp-duration">June 1, 2026 – November 30, 2026</span>
+          </div>
+
+          <ul class="exp-points-list">
+            <li>Worked on full-stack web development using MongoDB, Express.js, React.js and Node.js.</li>
+            <li>Worked with REST APIs and database operations.</li>
+            <li>Contributed to UI integration, debugging and development workflows.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SKILLS SECTION -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">03. Toolset</span>
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-subtitle">
+          Core technologies and developer tools used across frontend, backend, and data workflows.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Languages -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <span>Programming Languages</span>
+            <span class="skill-count-badge">4</span>
+          </div>
+          <div class="skill-chips-wrap">
+            <span class="skill-chip-item">Java</span>
+            <span class="skill-chip-item">Python</span>
+            <span class="skill-chip-item">JavaScript</span>
+            <span class="skill-chip-item">SQL</span>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <span>Frontend Development</span>
+            <span class="skill-count-badge">5</span>
+          </div>
+          <div class="skill-chips-wrap">
+            <span class="skill-chip-item">React.js</span>
+            <span class="skill-chip-item">HTML</span>
+            <span class="skill-chip-item">CSS</span>
+            <span class="skill-chip-item">Tailwind CSS</span>
+            <span class="skill-chip-item">Vite</span>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <span>Backend Engineering</span>
+            <span class="skill-count-badge">3</span>
+          </div>
+          <div class="skill-chips-wrap">
+            <span class="skill-chip-item">Node.js</span>
+            <span class="skill-chip-item">Express.js</span>
+            <span class="skill-chip-item">REST APIs</span>
+          </div>
+        </div>
+
+        <!-- Databases -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <span>Databases</span>
+            <span class="skill-count-badge">2</span>
+          </div>
+          <div class="skill-chips-wrap">
+            <span class="skill-chip-item">MongoDB</span>
+            <span class="skill-chip-item">MySQL</span>
+          </div>
+        </div>
+
+        <!-- Tools & Concepts -->
+        <div class="skill-card skill-card-span-2">
+          <div class="skill-card-header">
+            <span>Tools &amp; Concepts</span>
+            <span class="skill-count-badge">5</span>
+          </div>
+          <div class="skill-chips-wrap">
+            <span class="skill-chip-item">Git</span>
+            <span class="skill-chip-item">GitHub</span>
+            <span class="skill-chip-item">Postman</span>
+            <span class="skill-chip-item">Machine Learning</span>
+            <span class="skill-chip-item">AI Integration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. DSA SECTION -->
+  <section id="dsa">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">04. Problem Solving</span>
+        <h2 class="section-title">Data Structures &amp; Algorithms</h2>
+        <p class="section-subtitle">
+          Disciplined practice focused on optimal time and space complexity in Java.
+        </p>
+      </div>
+
+      <div class="dsa-card-wrap">
+        <div class="dsa-metrics-strip">
+          <div class="dsa-metric-cell">
+            <span class="dsa-stat-number">400+</span>
+            <span class="dsa-stat-title">LeetCode Problems Solved</span>
+          </div>
+          <div class="dsa-metric-cell">
+            <span class="dsa-stat-number">100 Days</span>
+            <span class="dsa-stat-title">LeetCode Badge Completed</span>
+          </div>
+          <div class="dsa-metric-cell">
+            <span class="dsa-stat-number">Java</span>
+            <span class="dsa-stat-title">Primary Problem-Solving Language</span>
+          </div>
+        </div>
+
+        <!-- Grouped DSA Topics -->
+        <div class="dsa-topic-groups">
+          <div class="dsa-group-block">
+            <span class="dsa-group-label">Foundations</span>
+            <div class="dsa-topics-list">
+              <span class="dsa-tag">Arrays</span>
+              <span class="dsa-tag">Strings</span>
+              <span class="dsa-tag">Hashing</span>
+            </div>
+          </div>
+
+          <div class="dsa-group-block">
+            <span class="dsa-group-label">Searching &amp; Optimization</span>
+            <div class="dsa-topics-list">
+              <span class="dsa-tag">Binary Search</span>
+              <span class="dsa-tag">Two Pointers</span>
+              <span class="dsa-tag">Sorting</span>
+            </div>
+          </div>
+
+          <div class="dsa-group-block">
+            <span class="dsa-group-label">Data Structures</span>
+            <div class="dsa-topics-list">
+              <span class="dsa-tag">Linked Lists</span>
+              <span class="dsa-tag">Stack</span>
+              <span class="dsa-tag">Queue</span>
+              <span class="dsa-tag">Trees</span>
+              <span class="dsa-tag">BST</span>
+              <span class="dsa-tag">Heaps</span>
+            </div>
+          </div>
+
+          <div class="dsa-group-block">
+            <span class="dsa-group-label">Algorithms</span>
+            <div class="dsa-topics-list">
+              <span class="dsa-tag">Recursion</span>
+              <span class="dsa-tag">Backtracking</span>
+              <span class="dsa-tag">Complexity Analysis</span>
             </div>
           </div>
         </div>
 
-        <!-- Note -->
-        <p
-          style="
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            color: var(--muted);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-          "
-        >
-          💡 More projects coming soon — currently building and learning!
+        <div class="dsa-action-row">
+          <span style="font-size: 0.92rem; color: var(--text-muted);">
+            View verified submissions and daily consistency on LeetCode.
+          </span>
+          <a href="https://leetcode.com/u/Sahil_Khot_18/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+            View LeetCode Profile ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ABOUT ME SECTION -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">05. Background</span>
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">
+          Personal background, technical mindset, and engineering interests.
         </p>
       </div>
-    </section>
 
-    <!-- SKILLS -->
-    <section id="skills">
-      <div class="container">
-        <div class="section-tag">Expertise</div>
-        <h2>Skills & Proficiency</h2>
-        <p class="section-sub">
-          My current skill levels as a student developer — always improving.
+      <div class="about-card-wrap">
+        <p class="about-paragraph">
+          I'm a 4th-year Computer Engineering student focused on building full-stack web applications with the MERN stack. I enjoy turning ideas into working products, from designing APIs and database schemas to building responsive interfaces.
         </p>
-        <div class="skills-grid">
-          <div class="reveal">
-            <div class="skill-head">
-              <span class="skill-name">HTML & CSS</span
-              ><span class="skill-pct">85%</span>
-            </div>
-            <div class="skill-track">
-              <div class="skill-fill" data-w="85"></div>
-            </div>
+        <p class="about-paragraph">
+          Alongside development, I regularly practice DSA and explore practical AI/ML integrations. My main projects include SolarSense AI and Project Match, where I've worked across frontend, backend, databases, and intelligent application features.
+        </p>
+
+        <div class="about-highlights-grid">
+          <div class="about-hl-card">
+            <span class="about-hl-title">Full-Stack Development</span>
+            <span class="about-hl-desc">React, Node.js, Express, MongoDB and REST APIs.</span>
           </div>
-          <div class="reveal" style="transition-delay: 0.05s">
-            <div class="skill-head">
-              <span class="skill-name">JavaScript</span
-              ><span class="skill-pct">75%</span>
-            </div>
-            <div class="skill-track">
-              <div class="skill-fill" data-w="75"></div>
-            </div>
+          <div class="about-hl-card">
+            <span class="about-hl-title">Problem Solving</span>
+            <span class="about-hl-desc">400+ LeetCode problems across core DSA topics in Java.</span>
           </div>
-          <div class="reveal" style="transition-delay: 0.1s">
-            <div class="skill-head">
-              <span class="skill-name">React.js</span
-              ><span class="skill-pct">70%</span>
-            </div>
-            <div class="skill-track">
-              <div class="skill-fill" data-w="70"></div>
-            </div>
-          </div>
-          <div class="reveal" style="transition-delay: 0.15s">
-            <div class="skill-head">
-              <span class="skill-name">Node.js & Express</span
-              ><span class="skill-pct">60%</span>
-            </div>
-            <div class="skill-track">
-              <div class="skill-fill" data-w="60"></div>
-            </div>
-          </div>
-          <div class="reveal" style="transition-delay: 0.2s">
-            <div class="skill-head">
-              <span class="skill-name">MongoDB</span
-              ><span class="skill-pct">60%</span>
-            </div>
-            <div class="skill-track">
-              <div class="skill-fill" data-w="60"></div>
-            </div>
-          </div>
-          <div class="reveal" style="transition-delay: 0.25s">
-            <div class="skill-head">
-              <span class="skill-name">MySQL</span
-              ><span class="skill-pct">55%</span>
-            </div>
-            <div class="skill-track">
-              <div class="skill-fill" data-w="55"></div>
-            </div>
+          <div class="about-hl-card">
+            <span class="about-hl-title">AI / ML Integration</span>
+            <span class="about-hl-desc">Practical AI-assisted features and recommendation workflows.</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="container">
-        <div class="section-tag">Contact</div>
-        <h2>Get In Touch</h2>
-        <p class="section-sub">
-          Open to internships, collaborations, or just a friendly chat about
-          tech!
+  <!-- 7. ACHIEVEMENTS SECTION (Compact) -->
+  <section id="achievements">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">06. Recognitions</span>
+        <h2 class="section-title">Achievements</h2>
+        <p class="section-subtitle">
+          Key academic and algorithmic milestones.
         </p>
-        <div class="contact-grid">
-          <div class="reveal">
-            <p>
-              I'm a student actively looking for internship opportunities and
-              projects to work on. If you have something interesting, feel free
-              to reach out — I'd love to connect!
+      </div>
+
+      <div class="achievements-grid">
+        <div class="achievement-item">
+          <div class="achieve-header">
+            <span class="achieve-val">9.18</span>
+            <span class="achieve-category-badge">Academic</span>
+          </div>
+          <div class="achieve-title">B.Tech Cumulative Grade Point Average</div>
+          <div class="achieve-sub">Vidya Pratishthan's Kamalnayan Bajaj Institute of Engineering and Technology, Baramati.</div>
+        </div>
+
+        <div class="achievement-item">
+          <div class="achieve-header">
+            <span class="achieve-val">98.62</span>
+            <span class="achieve-category-badge">Competitive Exam</span>
+          </div>
+          <div class="achieve-title">MHT-CET Percentile</div>
+          <div class="achieve-sub">State Common Entrance Examination for Engineering Admissions (2023).</div>
+        </div>
+
+        <div class="achievement-item">
+          <div class="achieve-header">
+            <span class="achieve-val">400+</span>
+            <span class="achieve-category-badge">Algorithmic</span>
+          </div>
+          <div class="achieve-title">LeetCode Problems Solved</div>
+          <div class="achieve-sub">Practice across arrays, strings, binary search, trees, and linked lists in Java.</div>
+        </div>
+
+        <div class="achievement-item">
+          <div class="achieve-header">
+            <span class="achieve-val">100 Days</span>
+            <span class="achieve-category-badge">Consistency</span>
+          </div>
+          <div class="achieve-title">LeetCode 100 Days Badge</div>
+          <div class="achieve-sub">Earned badge for sustained daily problem-solving discipline.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. EDUCATION SECTION (University Dominant) -->
+  <section id="education">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">07. Education</span>
+        <h2 class="section-title">Academic Background</h2>
+        <p class="section-subtitle">
+          University engineering degree and foundational schooling credentials.
+        </p>
+      </div>
+
+      <div class="education-container">
+        <!-- University Primary Card -->
+        <div class="edu-card-primary">
+          <div class="edu-top-row">
+            <div>
+              <h3 class="edu-degree-name">B.Tech in Computer Engineering</h3>
+              <div class="edu-college-name">Vidya Pratishthan's Kamalnayan Bajaj Institute of Engineering and Technology, Baramati</div>
+            </div>
+            <span class="edu-batch">2023 – 2027</span>
+          </div>
+          <div class="edu-cgpa-pill">CGPA: 9.18 / 10.0</div>
+        </div>
+
+        <!-- School Secondary Cards -->
+        <div class="edu-secondary-grid">
+          <div class="edu-secondary-card">
+            <h4 class="sec-degree-name">Higher Secondary Education (Class XII)</h4>
+            <div class="sec-school-name">Vidya Pratishthan’s Arts, Science and Commerce College, Baramati &bull; 2023</div>
+            <span class="sec-score-badge">Score: 90.17%</span>
+          </div>
+
+          <div class="edu-secondary-card">
+            <h4 class="sec-degree-name">Secondary School Certificate (Class X)</h4>
+            <div class="sec-school-name">New English School, Dorlewadi &bull; 2021</div>
+            <span class="sec-score-badge">Score: 98.80%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. RESUME SECTION (Functional Direct Download) -->
+  <section id="resume">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">08. Credentials</span>
+        <h2 class="section-title">Resume</h2>
+        <p class="section-subtitle">
+          Review my formal engineering qualifications, project details, and technical background.
+        </p>
+      </div>
+
+      <div class="resume-section-card">
+        <div class="resume-info-block">
+          <h3 class="resume-card-title">Sahil Khot — Software Engineering Resume</h3>
+          <p class="resume-card-desc">
+            Directly download the official PDF version detailing education, technical stack, internship experience, and full-stack projects.
+          </p>
+        </div>
+        <div>
+          <a href="Sahil_Khot_Resume.pdf" target="_blank" download="Sahil_Khot_Resume.pdf" class="btn btn-primary" id="downloadResumeBtn">
+            <svg class="icon-stroke" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download Resume (PDF)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. CONTACT SECTION -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">09. Get In Touch</span>
+        <h2 class="section-title">Let's build something useful.</h2>
+        <p class="section-subtitle">
+          Available for software engineering roles, internships, and collaborative development.
+        </p>
+      </div>
+
+      <div class="contact-grid-wrap">
+        <div class="contact-channels-column">
+          <p class="contact-intro-text">
+            Feel free to connect directly via email, LinkedIn, or GitHub. I check messages regularly and respond promptly.
+          </p>
+
+          <div class="contact-channels-list">
+            <!-- Email (Primary) -->
+            <a href="mailto:sahilkhot1152005@gmail.com" class="contact-channel-row">
+              <div class="channel-icon-wrap">
+                <svg class="icon-stroke" viewBox="0 0 24 24">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div class="channel-texts">
+                <span class="channel-type-label">Email (Primary)</span>
+                <span class="channel-handle-val">sahilkhot1152005@gmail.com</span>
+              </div>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/sahil-khot-/" target="_blank" rel="noopener noreferrer" class="contact-channel-row">
+              <div class="channel-icon-wrap">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </div>
+              <div class="channel-texts">
+                <span class="channel-type-label">LinkedIn</span>
+                <span class="channel-handle-val">linkedin.com/in/sahil-khot-</span>
+              </div>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/sahil-khot" target="_blank" rel="noopener noreferrer" class="contact-channel-row">
+              <div class="channel-icon-wrap">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+              </div>
+              <div class="channel-texts">
+                <span class="channel-type-label">GitHub</span>
+                <span class="channel-handle-val">github.com/sahil-khot</span>
+              </div>
+            </a>
+
+            <!-- LeetCode -->
+            <a href="https://leetcode.com/u/Sahil_Khot_18/" target="_blank" rel="noopener noreferrer" class="contact-channel-row">
+              <div class="channel-icon-wrap">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .666-1.607 2.6 2.6 0 0 1 .614-.528l3.85-4.12 5.4-5.783a1.365 1.365 0 0 0-.003-1.93 1.372 1.372 0 0 0-.97-.403z"/>
+                  <path d="M9.833 10.924a1.377 1.377 0 0 0-1.947 1.948l3.626 3.626a1.378 1.378 0 0 0 1.95-.002 1.38 1.38 0 0 0 0-1.948l-3.629-3.624z"/>
+                </svg>
+              </div>
+              <div class="channel-texts">
+                <span class="channel-type-label">LeetCode</span>
+                <span class="channel-handle-val">leetcode.com/u/Sahil_Khot_18/</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact Form (Honest mailto interaction) -->
+        <div class="contact-form-card">
+          <form id="contactForm" novalidate>
+            <div id="formFeedback" class="form-feedback-msg" role="alert"></div>
+
+            <div class="form-two-col">
+              <div class="form-field-group">
+                <label for="userName" class="field-label">Your Name</label>
+                <input type="text" id="userName" class="input-control" placeholder="e.g. Alex Smith" required />
+              </div>
+              <div class="form-field-group">
+                <label for="userEmail" class="field-label">Your Email</label>
+                <input type="email" id="userEmail" class="input-control" placeholder="alex@company.com" required />
+              </div>
+            </div>
+
+            <div class="form-field-group">
+              <label for="userSubject" class="field-label">Subject</label>
+              <input type="text" id="userSubject" class="input-control" placeholder="Full-Stack Opportunity / Project Collaboration" required />
+            </div>
+
+            <div class="form-field-group">
+              <label for="userMessage" class="field-label">Message</label>
+              <textarea id="userMessage" class="textarea-control" placeholder="Hi Sahil, I saw your portfolio and SolarSense AI project..." required></textarea>
+            </div>
+
+            <p class="form-helper-note">
+              Clicking below will open your default email client with your message pre-filled to sahilkhot1152005@gmail.com.
             </p>
-            <div class="contact-links">
-              <a href="mailto:sahilkhot1152005@gmail.com" class="c-link">
-                <div class="c-icon">✉</div>
-                sahilkhot1152005@gmail.com
-              </a>
-              <a href="tel:+917350160264" class="c-link">
-                <div class="c-icon">📞</div>
-                +91 73501 60264
-              </a>
-              <a
-                href="https://www.linkedin.com/in/sahil-khot-/"
-                target="_blank"
-                class="c-link"
-              >
-                <div class="c-icon">in</div>
-                linkedin.com/in/sahil-khot-
-              </a>
-              <a
-                href="https://github.com/sahil-khot"
-                target="_blank"
-                class="c-link"
-              >
-                <div class="c-icon">gh</div>
-                github.com/sahil-khot
-              </a>
-            </div>
-          </div>
 
-          <div class="form reveal" style="transition-delay: 0.1s">
-            <div class="form-row">
-              <div class="form-group">
-                <label>Name</label><input type="text" placeholder="Your name" />
-              </div>
-              <div class="form-group">
-                <label>Email</label
-                ><input type="email" placeholder="your@email.com" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Subject</label
-              ><input
-                type="text"
-                placeholder="Internship / Collaboration / Other"
-              />
-            </div>
-            <div class="form-group">
-              <label>Message</label
-              ><textarea
-                rows="5"
-                placeholder="Tell me about the opportunity or project..."
-              ></textarea>
-            </div>
-            <button
-              class="btn btn-blue"
-              style="border: none; align-self: flex-start"
-              onclick="sendMsg(this)"
-            >
-              Send Message
+            <button type="submit" class="btn btn-primary" id="formSubmitBtn">
+              Open in Email Client
+              <svg class="icon-stroke" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </button>
-          </div>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FOOTER -->
-    <footer>
-      <div>© Sahil Khot. All rights reserved.</div>
-      <div class="footer-links">
-        <a href="https://github.com/sahilkhot1152005-droid" target="_blank"
-          >GitHub</a
-        >
-        <a href="https://www.linkedin.com/in/sahil-khot-/" target="_blank"
-          >LinkedIn</a
-        >
-        <a href="mailto:sahilkhot1152005@gmail.com">Email</a>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand-text">Sahil Khot</div>
+        <div class="footer-copy-text">B.Tech Computer Engineering &bull; Full-Stack Developer</div>
       </div>
-    </footer>
 
-    <script src="script.js"></script>
-  </body>
+      <div class="footer-social-row">
+        <a href="https://github.com/sahil-khot" target="_blank" rel="noopener noreferrer" class="footer-social-link">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/sahil-khot-/" target="_blank" rel="noopener noreferrer" class="footer-social-link">LinkedIn ↗</a>
+        <a href="https://leetcode.com/u/Sahil_Khot_18/" target="_blank" rel="noopener noreferrer" class="footer-social-link">LeetCode ↗</a>
+        <a href="mailto:sahilkhot1152005@gmail.com" class="footer-social-link">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODAL 1: SolarSense AI Detailed View
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-solarsense" role="dialog" aria-modal="true" aria-labelledby="modal-solarsense-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="modal-solarsense-title">SolarSense AI</h3>
+          <p class="modal-subtitle">AI-assisted solar feasibility and energy analysis platform</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('solarsense')" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div>
+          <div class="modal-section-title">Dashboard Preview</div>
+          <div class="modal-preview-image">
+            <img src="solarsense-preview.png" alt="SolarSense AI Dashboard Interface" loading="lazy" />
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Project Overview</div>
+          <p>
+            An AI-assisted solar analysis platform that analyzes electricity usage and helps users evaluate solar system size, investment, savings, subsidy impact and payback.
+          </p>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Problem &amp; Solution</div>
+          <p>
+            Traditional solar assessment requires manual calculations and technical audits that are opaque to consumers. SolarSense AI extracts consumption insights directly from electricity bills, models regional tariffs, and simulates what-if scenarios with immediate payback calculations.
+          </p>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Tech Stack</div>
+          <div class="tech-chips-bar">
+            <span class="tech-chip">React.js</span>
+            <span class="tech-chip">Node.js</span>
+            <span class="tech-chip">Express.js</span>
+            <span class="tech-chip">MongoDB</span>
+            <span class="tech-chip">AI/ML Models</span>
+            <span class="tech-chip">Data Visualization</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Key Features Built</div>
+          <div class="modal-features-grid">
+            <div class="modal-feature-item">Electricity bill analysis</div>
+            <div class="modal-feature-item">Solar system recommendation</div>
+            <div class="modal-feature-item">What-if solar simulator</div>
+            <div class="modal-feature-item">Financial savings/payback analysis</div>
+            <div class="modal-feature-item">AI-assisted recommendations</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">My Contribution</div>
+          <p>
+            Architected full-stack implementation across frontend client and backend REST endpoints, built data models for billing analysis, implemented simulator logic, and connected AI recommendation features.
+          </p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="https://solar-sense-ai-client.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+          Live Demo ↗
+        </a>
+        <a href="https://github.com/sahil-khot/SolarSense-AI" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+          GitHub Repository ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: Project Match Detailed View
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-projectmatch" role="dialog" aria-modal="true" aria-labelledby="modal-projectmatch-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="modal-projectmatch-title">Project Match</h3>
+          <p class="modal-subtitle">Student collaboration and teammate discovery platform</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('projectmatch')" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div>
+          <div class="modal-section-title">Platform Preview</div>
+          <div class="modal-preview-image">
+            <img src="projectmatch-preview.png" alt="Project Match Platform Interface" loading="lazy" />
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Project Overview</div>
+          <p>
+            A student collaboration platform that helps students discover teammates, mentors and projects using profile data, filtering and recommendation workflows.
+          </p>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Problem &amp; Solution</div>
+          <p>
+            Students frequently struggle to find peers with complementary skill sets for hackathons, capstones, and side projects. Project Match bridges this gap by pairing students based on skill stack, project vision, and collaboration preferences.
+          </p>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Tech Stack</div>
+          <div class="tech-chips-bar">
+            <span class="tech-chip">React.js</span>
+            <span class="tech-chip">Vite</span>
+            <span class="tech-chip">Tailwind CSS</span>
+            <span class="tech-chip">Node.js</span>
+            <span class="tech-chip">Express.js</span>
+            <span class="tech-chip">MongoDB</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Key Features Built</div>
+          <div class="modal-features-grid">
+            <div class="modal-feature-item">Student discovery</div>
+            <div class="modal-feature-item">ML-based teammate recommendation</div>
+            <div class="modal-feature-item">Mentor discovery</div>
+            <div class="modal-feature-item">Project/team formation</div>
+            <div class="modal-feature-item">Messaging and applications</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">My Contribution</div>
+          <p>
+            Built frontend components using React and Vite, developed MERN REST APIs, implemented role-based authentication, and designed user profile matching data workflows.
+          </p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="https://project-match-client-virid.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+          Live Demo ↗
+        </a>
+        <a href="https://github.com/sahil-khot/Project-Match" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+          GitHub Repository ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
 </html>
