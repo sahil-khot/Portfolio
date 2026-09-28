@@ -28,6 +28,7 @@ Personal developer portfolio and resume website of **Sahil Khot**, Final Year Co
 - **Competitive Entrance:** **98.62 percentile** in MHT-CET (2023)
 - **Algorithmic Problem Solving:** **450+ LeetCode problems** solved in Java covering Arrays, Two Pointers, Binary Search, Trees, Linked Lists, Stack/Queue, Recursion, and DP; earned the **100 Days LeetCode Badge**.
 - **Industry Experience:** **MERN Stack Intern at Anvistar (Pune, India)** — contributed to company web features, REST API endpoints, MongoDB schemas, and responsive UI components.
+- **Scholarship Examination:** Qualified **NMMS (National Means-cum-Merit Scholarship) Examination** in 8th Standard.
 
 ---
 
