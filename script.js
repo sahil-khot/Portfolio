@@ -1,21 +1,27 @@
 // ==========================================================================
-// SAHIL KHOT — DEVELOPER PORTFOLIO JAVASCRIPT
-// Lightweight, Robust, Fully Accessible, Vanilla JavaScript
+// SAHIL KHOT — PROFESSIONAL DEVELOPER PORTFOLIO
+// Fast, Lightweight, Fully Accessible, Vanilla JavaScript
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Mobile Menu Functionality
+  // --------------------------------------------------------------------------
+  // 1. Mobile Menu Functionality & Accessible Toggle
+  // --------------------------------------------------------------------------
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('navMenu');
 
   function openMenu() {
+    if (!navMenu || !navToggle) return;
     navMenu.classList.add('open');
     navToggle.setAttribute('aria-expanded', 'true');
+    navToggle.setAttribute('aria-label', 'Close navigation menu');
   }
 
   function closeMenu() {
+    if (!navMenu || !navToggle) return;
     navMenu.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open navigation menu');
   }
 
   if (navToggle && navMenu) {
@@ -44,12 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --------------------------------------------------------------------------
   // 2. Active Nav Link on Scroll
+  // --------------------------------------------------------------------------
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-menu .nav-link');
 
   function updateActiveNav() {
-    const scrollPos = window.scrollY + 120;
+    const scrollPos = window.scrollY + 140;
 
     sections.forEach((section) => {
       const top = section.offsetTop;
@@ -70,53 +78,126 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', updateActiveNav, { passive: true });
   updateActiveNav();
 
-  // 3. Modal Dialog Functionality
+  // --------------------------------------------------------------------------
+  // 3. Modal Dialog Functionality with Focus Trap & Focus Restoration
+  // --------------------------------------------------------------------------
+  let lastFocusedElement = null;
+
+  function getFocusableElements(container) {
+    return Array.from(
+      container.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
+  }
+
   window.openModal = function (modalKey) {
     const modal = document.getElementById(`modal-${modalKey}`);
-    if (modal) {
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
+    if (!modal) return;
 
-      // Focus the close button for accessibility
-      const closeBtn = modal.querySelector('.modal-close-btn');
-      if (closeBtn) closeBtn.focus();
+    lastFocusedElement = document.activeElement;
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    // Focus close button or first interactive element
+    const focusable = getFocusableElements(modal);
+    const closeBtn = modal.querySelector('.modal-close-btn');
+
+    if (closeBtn) {
+      setTimeout(() => closeBtn.focus(), 50);
+    } else if (focusable.length > 0) {
+      setTimeout(() => focusable[0].focus(), 50);
     }
   };
 
   window.closeModal = function (modalKey) {
-    const modal = document.getElementById(`modal-${modalKey}`);
-    if (modal) {
-      modal.classList.remove('open');
-      document.body.style.overflow = '';
+    let modal;
+    if (modalKey) {
+      modal = document.getElementById(`modal-${modalKey}`);
+    } else {
+      modal = document.querySelector('.modal-overlay.open');
+    }
+
+    if (!modal) return;
+
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    // Restore focus to opener element
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      setTimeout(() => {
+        lastFocusedElement.focus();
+        lastFocusedElement = null;
+      }, 50);
     }
   };
 
-  // Close modals when clicking outside dialog
+  // Close modals when clicking backdrop
   document.querySelectorAll('.modal-overlay').forEach((overlay) => {
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
-        overlay.classList.remove('open');
-        document.body.style.overflow = '';
+        window.closeModal();
       }
     });
   });
 
-  // 4. Keyboard Navigation: ESC closes open menus & modals
+  // Handle Tab key trapping inside open modal & ESC closing
   document.addEventListener('keydown', (e) => {
+    const openModalEl = document.querySelector('.modal-overlay.open');
+
     if (e.key === 'Escape') {
-      // Close mobile menu
       if (navMenu && navMenu.classList.contains('open')) {
         closeMenu();
       }
-      // Close open modals
-      document.querySelectorAll('.modal-overlay.open').forEach((overlay) => {
-        overlay.classList.remove('open');
-        document.body.style.overflow = '';
-      });
+      if (openModalEl) {
+        window.closeModal();
+      }
+      return;
+    }
+
+    // Modal focus trapping
+    if (e.key === 'Tab' && openModalEl) {
+      const focusable = getFocusableElements(openModalEl);
+      if (focusable.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      const firstElement = focusable[0];
+      const lastElement = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
     }
   });
 
-  // 5. Contact Form Validation & Honest Mailto Handling
+  // Keyboard support for interactive preview cards (Enter or Space to open modal)
+  document.querySelectorAll('.project-preview-wrap[role="button"]').forEach((cardPreview) => {
+    cardPreview.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        cardPreview.click();
+      }
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // 4. Contact Form Validation & Mailto Action
+  // --------------------------------------------------------------------------
   const contactForm = document.getElementById('contactForm');
   const formSubmitBtn = document.getElementById('formSubmitBtn');
   const formFeedback = document.getElementById('formFeedback');
@@ -125,38 +206,40 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const name = document.getElementById('userName').value.trim();
-      const email = document.getElementById('userEmail').value.trim();
-      const subject = document.getElementById('userSubject').value.trim();
-      const message = document.getElementById('userMessage').value.trim();
+      const nameInput = document.getElementById('userName');
+      const emailInput = document.getElementById('userEmail');
+      const subjectInput = document.getElementById('userSubject');
+      const messageInput = document.getElementById('userMessage');
 
-      // Basic email regex
+      const name = nameInput ? nameInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const subject = subjectInput ? subjectInput.value.trim() : '';
+      const message = messageInput ? messageInput.value.trim() : '';
+
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      // Validation
       if (!name) {
         showFeedback('Please enter your name.', 'error');
-        document.getElementById('userName').focus();
+        if (nameInput) nameInput.focus();
         return;
       }
       if (!email || !emailRegex.test(email)) {
         showFeedback('Please enter a valid email address.', 'error');
-        document.getElementById('userEmail').focus();
+        if (emailInput) emailInput.focus();
         return;
       }
       if (!subject) {
         showFeedback('Please enter a subject.', 'error');
-        document.getElementById('userSubject').focus();
+        if (subjectInput) subjectInput.focus();
         return;
       }
       if (!message) {
         showFeedback('Please enter your message.', 'error');
-        document.getElementById('userMessage').focus();
+        if (messageInput) messageInput.focus();
         return;
       }
 
-      // Valid: Honest handling
-      showFeedback('Opening your email client...', 'success');
+      showFeedback('Launching your default email client with your message pre-filled...', 'success');
       formSubmitBtn.disabled = true;
 
       const encodedSubject = encodeURIComponent(subject);
@@ -170,12 +253,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
           showFeedback(
-            'If your email client did not automatically launch, you can email directly at sahilkhot1152005@gmail.com.',
+            'If your email client did not automatically launch, feel free to write directly to sahilkhot1152005@gmail.com.',
             'success'
           );
           formSubmitBtn.disabled = false;
-        }, 1200);
-      }, 400);
+        }, 1500);
+      }, 350);
     });
 
     function showFeedback(text, type) {
