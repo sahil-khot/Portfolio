@@ -196,14 +196,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --------------------------------------------------------------------------
-  // 4. Contact Form Validation & Mailto Action
+  // 4. Contact Form - Direct Email Dispatch to Sahil
   // --------------------------------------------------------------------------
   const contactForm = document.getElementById('contactForm');
   const formSubmitBtn = document.getElementById('formSubmitBtn');
   const formFeedback = document.getElementById('formFeedback');
 
   if (contactForm && formSubmitBtn && formFeedback) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const nameInput = document.getElementById('userName');
@@ -239,26 +239,52 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      showFeedback('Launching your default email client with your message pre-filled...', 'success');
+      // UI Loading State
+      const originalBtnHTML = formSubmitBtn.innerHTML;
       formSubmitBtn.disabled = true;
+      formSubmitBtn.innerHTML = 'Sending Message...';
+      showFeedback('Sending your message directly to Sahil...', 'success');
 
-      const encodedSubject = encodeURIComponent(subject);
-      const encodedBody = encodeURIComponent(
-        `Hi Sahil,\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n---\nSent via Portfolio Contact Form`
-      );
-      const mailtoUrl = `mailto:sahilkhot1152005@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/sahilkhot1152005@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            _subject: `[Portfolio Contact] ${subject}`,
+            message: message,
+            _captcha: 'false',
+            _template: 'table'
+          })
+        });
 
-      setTimeout(() => {
+        const result = await response.json();
+
+        if (response.ok && (result.success === 'true' || result.success === true || result.message)) {
+          showFeedback(`Thank you, ${name}! Your message has been sent directly to Sahil. He will reply to ${email} soon.`, 'success');
+          contactForm.reset();
+        } else {
+          throw new Error(result.message || 'Form submission failed');
+        }
+      } catch (err) {
+        // Fallback: If network or browser blocks endpoint, provide clear direct mailto option
+        const encodedSubject = encodeURIComponent(subject);
+        const encodedBody = encodeURIComponent(`Hi Sahil,\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n---\nSent via Portfolio Contact Form`);
+        const mailtoUrl = `mailto:sahilkhot1152005@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+
+        showFeedback(
+          'Direct network dispatch failed. Opening your email client to send to sahilkhot1152005@gmail.com...',
+          'error'
+        );
         window.location.href = mailtoUrl;
-
-        setTimeout(() => {
-          showFeedback(
-            'If your email client did not automatically launch, feel free to write directly to sahilkhot1152005@gmail.com.',
-            'success'
-          );
-          formSubmitBtn.disabled = false;
-        }, 1500);
-      }, 350);
+      } finally {
+        formSubmitBtn.disabled = false;
+        formSubmitBtn.innerHTML = originalBtnHTML;
+      }
     });
 
     function showFeedback(text, type) {
