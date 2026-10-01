@@ -570,8 +570,7 @@ section:first-of-type {
 .project-preview-img {
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
-  max-height: 520px;
+  max-height: 540px;
   object-fit: cover;
   object-position: top center;
   display: block;
