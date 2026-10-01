@@ -275,6 +275,17 @@ a {
   text-decoration: none;
 }
 
+.inline-text-link {
+  color: var(--accent-cyan);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.inline-text-link:hover {
+  color: var(--accent-indigo);
+}
+
 button {
   font-family: inherit;
   border: none;
