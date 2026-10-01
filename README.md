@@ -57,9 +57,9 @@ This repository contains the source code for my personal developer portfolio and
 
 ```
 ├── Languages:                Java (Core & OOP), JavaScript (ES6+), SQL, Python (Basics)
-├── Frontend Development:     React.js, Vite, Tailwind CSS, HTML5, Vanilla CSS3 (Custom Design System)
+├── Frontend Development:     React.js, Vite, Tailwind CSS, Bootstrap 5, HTML5, Vanilla CSS3 (Custom Design System)
 ├── Backend Engineering:      Node.js, Express.js, RESTful API Design, JWT Authentication
-├── Database Management:      MongoDB (Mongoose ODM), MySQL
+├── Database Management:      MongoDB (Mongoose ODM, Atlas), MySQL
 └── Developer Tools:          Git, GitHub, Postman, VS Code, Data Structures & Algorithms, ML Basics
 ```
 
@@ -70,14 +70,14 @@ This repository contains the source code for my personal developer portfolio and
 ### **MERN Stack Intern** &bull; *Anvistar (Pune, India)*
 *June 2026 – Present*
 
-- **Full-Stack Development:** Engineered and integrated responsive web modules and user flows using MongoDB, Express.js, React.js, and Node.js.
+- **Full-Stack Development:** Engineered and integrated responsive web modules, athletic e-commerce workflows, and user flows using MongoDB, Express.js, React.js, and Node.js (delivering the **Alaybee Sports** platform).
 - **RESTful API Services:** Designed performant REST endpoints with structured request validation, error-handling middleware, and client-server integration.
 - **Database Modeling:** Managed MongoDB document schemas, indexing strategies, and CRUD database operations to ensure transactional consistency.
 - **Quality Assurance & Collaboration:** Participated in sprint planning, code reviews, debugging cross-browser UI issues, and testing API payloads with Postman.
 
 ---
 
-## 🚀 Independently Developed Featured Projects
+## 🚀 Featured Engineering Projects
 
 ### 1. [SolarSense AI — Clean Energy Analytics & Solar Feasibility Platform](https://solar-sense-ai-client.vercel.app)
 *Independently architected and implemented full-stack web application.*
@@ -109,6 +109,22 @@ This repository contains the source code for my personal developer portfolio and
 
 ---
 
+### 3. [Alaybee Sports — Full-Stack Athletic Gear & E-Commerce Platform](https://alaybee-sports.vercel.app)
+*Internship project engineered with production-grade full-stack features.*
+
+- **Live Application:** [https://alaybee-sports.vercel.app](https://alaybee-sports.vercel.app)
+- **Source Code:** [https://github.com/sahil-khot/Alaybee-Sports](https://github.com/sahil-khot/Alaybee-Sports)
+- **Tech Stack:** React 18, Vite, Bootstrap 5, Node.js, Express.js, MongoDB Atlas, JWT Authentication, REST APIs, Context API.
+- **Problem Solved:** Direct-to-consumer athletic equipment delivery without high retail markups, providing clubs, teams, and athletes reliable inventory, role-based discounts, and instant shipment tracking.
+- **Key Architectural Features:**
+  - **Multi-Sport Catalog & Reviews:** 160 curated products across 10 sports categories with customer feedback and ratings.
+  - **Context API State Synchronization:** Centralized React state for user sessions, persistent shopping cart, and wishlists.
+  - **Role-Based Member Privileges:** Pro Lounge athlete VIP area and role-based route guards.
+  - **Simulated Payment Gateway & Invoicing:** Multi-step checkout experience with payment receipt generation.
+  - **4-Stage Order Tracker:** Real-time visual tracking from order confirmation to doorstep delivery.
+
+---
+
 ## 📜 Certifications
 
 - **Programming in Java** — *NPTEL, IIT Kharagpur* (Jul – Oct 2024)
@@ -128,6 +144,7 @@ Portfolio/
 ├── Profile.jpg                 # Profile headshot
 ├── solarsense-preview.png      # SolarSense AI application dashboard preview
 ├── projectmatch-preview.png    # Project Match platform directory preview
+├── alaybee-preview.png         # Alaybee Sports e-commerce storefront preview
 └── README.md                   # Repository documentation and technical profile
 ```
 

@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sahil Khot | Software Engineer &amp; Full-Stack Developer</title>
-  <meta name="description" content="Portfolio of Sahil Khot — Computer Engineering student (CGPA 9.18), MERN Stack Intern at Anvistar, 450+ LeetCode problems solved in Java, and creator of SolarSense AI and Project Match." />
+  <meta name="description" content="Portfolio of Sahil Khot — Computer Engineering student (CGPA 9.18), MERN Stack Intern at Anvistar, 450+ LeetCode problems solved in Java, and creator of SolarSense AI, Project Match, and Alaybee Sports." />
   
   <!-- Open Graph Metadata -->
   <meta property="og:title" content="Sahil Khot | Software Engineer &amp; Full-Stack Developer" />
-  <meta property="og:description" content="Computer Engineering student (CGPA 9.18), MERN Stack Intern, 450+ LeetCode problems in Java, builder of SolarSense AI &amp; Project Match." />
+  <meta property="og:description" content="Computer Engineering student (CGPA 9.18), MERN Stack Intern, 450+ LeetCode problems in Java, builder of SolarSense AI, Project Match &amp; Alaybee Sports." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="Profile.jpg" />
 
@@ -83,7 +83,7 @@
             <div class="hero-role">Software Engineer &bull; Full-Stack Developer (MERN)</div>
 
             <p class="hero-desc">
-              I build practical, performant full-stack web applications using <strong>React, Node.js, Express, and MongoDB</strong>. I independently engineered <strong>SolarSense AI</strong> and <strong>Project Match</strong> from scratch with clean architectures and ML basics, complemented by disciplined problem solving (<strong>450+ LeetCode problems</strong> in Java) and professional MERN internship experience at <strong>Anvistar</strong>.
+              I build practical, performant full-stack web applications using <strong>React, Node.js, Express, and MongoDB</strong>. I engineered <strong>SolarSense AI</strong>, <strong>Project Match</strong>, and <strong>Alaybee Sports</strong> (internship project) with clean architectures, complemented by disciplined problem solving (<strong>450+ LeetCode problems</strong> in Java) and professional MERN internship experience at <strong>Anvistar</strong>.
             </p>
 
             <div class="hero-actions">
@@ -281,6 +281,63 @@
               </div>
             </div>
           </article>
+
+          <!-- 3. Alaybee Sports -->
+          <article class="project-card" id="project-alaybee">
+            <div class="project-preview-wrap" onclick="openModal('alaybee')" tabindex="0" role="button" aria-label="Open Alaybee Sports project details modal">
+              <img src="alaybee-preview.png" alt="Alaybee Sports e-commerce platform interface displaying athletic products catalog, categories, and shopping features" class="project-preview-img" loading="lazy" />
+              <div class="project-preview-overlay">
+                <span class="overlay-badge">
+                  <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  View Architecture &amp; Details
+                </span>
+              </div>
+            </div>
+
+            <div class="project-info-wrap">
+              <div class="project-meta-top">
+                <span class="project-category-tag">Internship Project &bull; Full-Stack E-Commerce Platform</span>
+                <h3 class="project-title">Alaybee Sports</h3>
+                <p class="project-desc-short">
+                  A production-grade full-stack athletic gear and sports equipment e-commerce web application engineered as an internship project. Features 160+ curated products across 10 sports categories, JWT-authenticated role-based member privileges, simulated checkout processing, and real-time order shipment tracking.
+                </p>
+
+                <div class="tech-chips-bar" aria-label="Alaybee Sports Technologies">
+                  <span class="tech-chip">React 18</span>
+                  <span class="tech-chip">Vite</span>
+                  <span class="tech-chip">Bootstrap 5</span>
+                  <span class="tech-chip">Node.js</span>
+                  <span class="tech-chip">Express.js</span>
+                  <span class="tech-chip">MongoDB Atlas</span>
+                  <span class="tech-chip">JWT Auth</span>
+                  <span class="tech-chip">REST APIs</span>
+                </div>
+
+                <div class="feature-summary-title">Key Architectural Features</div>
+                <ul class="feature-summary-list">
+                  <li><strong>Multi-Sport Product Catalog:</strong> 160 curated products across 10 sports categories with instant search, multi-factor filtering, and customer reviews.</li>
+                  <li><strong>Centralized State Architecture:</strong> Context API providers for synchronized session authentication, persistent cart state, and user wishlists.</li>
+                  <li><strong>Role-Based Member Privileges:</strong> Protected Pro Lounge VIP area, role-based access guards, and exclusive athlete discounts.</li>
+                  <li><strong>Payment Gateway &amp; Shipment Tracking:</strong> Multi-stage simulated checkout with invoice receipt generation and real-time 4-stage order tracker.</li>
+                </ul>
+              </div>
+
+              <div class="project-actions-bar">
+                <a href="https://alaybee-sports.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" aria-label="Open Alaybee Sports Live Application">
+                  Live Demo ↗
+                </a>
+                <a href="https://github.com/sahil-khot/Alaybee-Sports" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="Open Alaybee Sports GitHub Repository">
+                  GitHub ↗
+                </a>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="openModal('alaybee')" aria-label="View Alaybee Sports technical architecture and deep dive">
+                  Technical Details
+                </button>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -308,7 +365,7 @@
 
             <ul class="exp-points-list">
               <li>
-                <strong>Full-Stack Architecture:</strong> Engineered and integrated responsive web modules and end-to-end user workflows using <strong>React.js, Node.js, Express.js, and MongoDB</strong>.
+                <strong>Full-Stack Architecture:</strong> Engineered and integrated responsive web modules and end-to-end user workflows using <strong>React.js, Node.js, Express.js, and MongoDB</strong>, delivering the <strong>Alaybee Sports</strong> athletic e-commerce platform.
               </li>
               <li>
                 <strong>API Development &amp; Integration:</strong> Designed performant RESTful API endpoints with structured request validation, error handling middleware, and reliable client-server integration.
@@ -355,12 +412,13 @@
           <div class="skill-card">
             <div class="skill-card-header">
               <span>Frontend Development</span>
-              <span class="skill-count-badge">5</span>
+              <span class="skill-count-badge">6</span>
             </div>
             <div class="skill-chips-wrap">
               <span class="skill-chip-item">React.js</span>
               <span class="skill-chip-item">Vite</span>
               <span class="skill-chip-item">Tailwind CSS</span>
+              <span class="skill-chip-item">Bootstrap 5</span>
               <span class="skill-chip-item">HTML5</span>
               <span class="skill-chip-item">Vanilla CSS3 (Design Systems)</span>
             </div>
@@ -971,6 +1029,86 @@
           Live Demo ↗
         </a>
         <a href="https://github.com/sahil-khot/Project-Match" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+          GitHub Repository ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 3: Alaybee Sports Detailed Architectural Breakdown
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-alaybee" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-alaybee-title" aria-describedby="modal-alaybee-desc">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="modal-alaybee-title">Alaybee Sports</h3>
+          <p class="modal-subtitle" id="modal-alaybee-desc">Internship Project &bull; Full-Stack Athletic Gear &amp; Equipment E-Commerce Platform</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('alaybee')" aria-label="Close Alaybee Sports details modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div>
+          <div class="modal-section-title">Platform Preview &amp; E-Commerce Storefront</div>
+          <div class="modal-preview-image">
+            <img src="alaybee-preview.png" alt="Alaybee Sports platform interface showing athlete e-commerce storefront, category navigation, and product showcase" loading="lazy" />
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Problem &amp; Motivation</div>
+          <p>
+            Outfitting grassroots sports clubs, academic sports teams, state athletes, and fitness enthusiasts frequently involves dealing with middlemen and retail markups with inconsistent inventory visibility. Alaybee Sports was engineered to deliver a seamless, high-performance direct-to-consumer digital commerce experience featuring comprehensive multi-sport catalogs, instant product reviews, member privileges, and end-to-end order tracking.
+          </p>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Technical Architecture &amp; Implementation</div>
+          <p>
+            Architected as a decoupled full-stack application with a high-performance <strong>React 18 (Vite)</strong> client and a robust <strong>Node.js / Express.js</strong> REST API. Global state is managed using the <strong>React Context API</strong> across authentication, persistent shopping cart items, and wishlist synchronization. The backend features <strong>JWT Bearer authentication</strong>, <strong>bcryptjs password hashing</strong>, role-based route protection, and document modeling with <strong>Mongoose / MongoDB Atlas</strong>.
+          </p>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Tech Stack &amp; Libraries</div>
+          <div class="tech-chips-bar">
+            <span class="tech-chip">React 18</span>
+            <span class="tech-chip">Vite</span>
+            <span class="tech-chip">Bootstrap 5</span>
+            <span class="tech-chip">Node.js</span>
+            <span class="tech-chip">Express.js</span>
+            <span class="tech-chip">MongoDB Atlas</span>
+            <span class="tech-chip">JWT Auth</span>
+            <span class="tech-chip">REST APIs</span>
+            <span class="tech-chip">Context API</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Core Features Built</div>
+          <div class="modal-features-grid">
+            <div class="modal-feature-item"><strong>160+ Curated Products Catalog:</strong> Filterable by 10 sport categories (Cricket, Football, Fitness, etc.) with real customer reviews and ratings.</div>
+            <div class="modal-feature-item"><strong>Synchronized Shopping Cart &amp; Wishlist:</strong> Context API state with quantity steppers, subtotal breakdown, and instant item updates.</div>
+            <div class="modal-feature-item"><strong>Role-Based Access &amp; Pro Lounge:</strong> Multi-role authentication with exclusive VIP access and athlete privileges.</div>
+            <div class="modal-feature-item"><strong>Simulated Payment Gateway:</strong> Multi-stage checkout process with automated invoice and receipt generation.</div>
+            <div class="modal-feature-item"><strong>4-Stage Order Shipment Tracker:</strong> Real-time shipment timeline monitoring from order placement to doorstep delivery.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">My Engineering Contributions</div>
+          <p>
+            Engineered as an internship project: developed modular React components with Bootstrap 5, implemented React Context for synchronized cart/auth states, created Express.js REST API endpoints with JWT authentication guards, and managed MongoDB database operations for users, catalog items, and order processing.
+          </p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="https://alaybee-sports.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+          Live Demo ↗
+        </a>
+        <a href="https://github.com/sahil-khot/Alaybee-Sports" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
           GitHub Repository ↗
         </a>
       </div>
