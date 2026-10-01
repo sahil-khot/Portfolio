@@ -1,0 +1,21 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor & IDE directories
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+
+# Temporary & script artifacts
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+convert_images.js
+test_check.js
+scratch/
+tmp/
