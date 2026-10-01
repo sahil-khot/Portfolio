@@ -174,7 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
   updateActiveNavSection();
 
   // --------------------------------------------------------------------------
-  // 5. Hero Dynamic Typed Role Rotator (With Reduced Motion Fallback)
+  // 5. Hero Dynamic Typed Role Rotator (Clean State Machine)
+  // Starts fully typed -> holds -> deletes -> pauses -> types -> holds
+  // Respects prefers-reduced-motion and clears properly on pagehide
   // --------------------------------------------------------------------------
   const roleRotator = document.getElementById('roleRotator');
   const roles = [
@@ -185,39 +187,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (roleRotator && !prefersReducedMotion) {
-    let roleIdx = 0;
-    let charIdx = roles[0].length;
-    let isDeleting = false;
-    let typingSpeed = 90;
+  if (roleRotator) {
+    if (prefersReducedMotion) {
+      // Show first role statically for reduced motion users
+      roleRotator.textContent = roles[0];
+    } else {
+      let roleIdx = 0;
+      let charIdx = roles[0].length;
+      let state = 'HOLD'; // Initial state: start fully typed
+      let roleTimer = null;
 
-    function typeLoop() {
-      const currentRole = roles[roleIdx];
+      function step() {
+        const currentRole = roles[roleIdx];
+        let nextDelay = 100;
 
-      if (isDeleting) {
-        roleRotator.textContent = currentRole.substring(0, charIdx - 1);
-        charIdx--;
-        typingSpeed = 45;
-      } else {
-        roleRotator.textContent = currentRole.substring(0, charIdx + 1);
-        charIdx++;
-        typingSpeed = 85;
+        switch (state) {
+          case 'HOLD':
+            // Hold fully typed text for 2400ms before deleting
+            nextDelay = 2400;
+            state = 'DELETE';
+            break;
+
+          case 'DELETE':
+            if (charIdx > 0) {
+              charIdx--;
+              roleRotator.textContent = currentRole.slice(0, charIdx);
+              nextDelay = 40;
+            } else {
+              // Deletion finished; advance to next role
+              roleIdx = (roleIdx + 1) % roles.length;
+              state = 'PAUSE';
+              nextDelay = 300;
+            }
+            break;
+
+          case 'PAUSE':
+            // Brief pause before typing next word
+            state = 'TYPE';
+            nextDelay = 120;
+            break;
+
+          case 'TYPE':
+            const nextRole = roles[roleIdx];
+            if (charIdx < nextRole.length) {
+              charIdx++;
+              roleRotator.textContent = nextRole.slice(0, charIdx);
+              nextDelay = 75;
+            } else {
+              // Word completely typed; transition to hold
+              state = 'HOLD';
+              nextDelay = 2400;
+            }
+            break;
+        }
+
+        roleTimer = setTimeout(step, nextDelay);
       }
 
-      if (!isDeleting && charIdx === currentRole.length) {
-        isDeleting = true;
-        typingSpeed = 2400; // Pause at full word
-      } else if (isDeleting && charIdx === 0) {
-        isDeleting = false;
-        roleIdx = (roleIdx + 1) % roles.length;
-        typingSpeed = 400; // Pause before next word
-      }
+      // Start initial hold
+      roleTimer = setTimeout(step, 2400);
 
-      setTimeout(typeLoop, typingSpeed);
+      window.addEventListener('pagehide', () => {
+        if (roleTimer) clearTimeout(roleTimer);
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (roleTimer) clearTimeout(roleTimer);
+        } else {
+          if (roleTimer) clearTimeout(roleTimer);
+          roleTimer = setTimeout(step, 1000);
+        }
+      });
     }
-
-    // Start typing after initial pause
-    setTimeout(typeLoop, 2000);
   }
 
   // --------------------------------------------------------------------------
@@ -240,16 +282,18 @@ document.addEventListener('DOMContentLoaded', () => {
       function updateNumber(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        // Easing: easeOutExpo
-        const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-        const currentVal = (target * ease).toFixed(decimals);
+        // Ease-out cubic
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const currentVal = progress === 1 ? target : (target * ease);
 
-        el.textContent = currentVal;
+        if (decimals > 0) {
+          el.textContent = currentVal.toFixed(decimals);
+        } else {
+          el.textContent = Math.round(currentVal).toString();
+        }
 
         if (progress < 1) {
           requestAnimationFrame(updateNumber);
-        } else {
-          el.textContent = target.toFixed(decimals);
         }
       }
 
@@ -259,11 +303,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (credibilityStrip && 'IntersectionObserver' in window) {
     const credObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        runCountUp();
-        credObserver.disconnect();
-      }
-    }, { threshold: 0.3 });
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          runCountUp();
+          credObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
 
     credObserver.observe(credibilityStrip);
   } else {
@@ -271,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 7. Scroll-Reveal Animations (IntersectionObserver)
+  // 7. Scroll Reveal Animations (IntersectionObserver)
   // --------------------------------------------------------------------------
   const revealElements = document.querySelectorAll('[data-reveal]');
 
@@ -284,8 +330,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
+      rootMargin: '0px 0px -60px 0px',
+      threshold: 0.1
     });
 
     revealElements.forEach((el) => revealObserver.observe(el));
@@ -294,9 +340,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 8. Modal Dialog Management (Focus Trap & Restoration)
+  // 8. Modal Management with Inert Background & Layout-Shift Free Scroll Lock
   // --------------------------------------------------------------------------
   let lastFocusedTrigger = null;
+
+  const backgroundElements = [
+    document.getElementById('siteHeader'),
+    document.getElementById('main-content'),
+    document.querySelector('.site-footer')
+  ];
+
+  function setBackgroundInert(isInert) {
+    backgroundElements.forEach((el) => {
+      if (el) {
+        if (isInert) {
+          el.setAttribute('inert', '');
+        } else {
+          el.removeAttribute('inert');
+        }
+      }
+    });
+  }
 
   function getFocusableElements(container) {
     return Array.from(
@@ -306,17 +370,28 @@ document.addEventListener('DOMContentLoaded', () => {
     ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
   }
 
-  window.openModal = function (modalKey) {
+  window.openModal = function (modalKey, triggerEl) {
     const modal = document.getElementById(`modal-${modalKey}`);
     if (!modal) return;
 
-    lastFocusedTrigger = document.activeElement;
+    lastFocusedTrigger = triggerEl || document.activeElement;
+
+    // Lock scroll without layout shift
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      const siteHeader = document.getElementById('siteHeader');
+      if (siteHeader) siteHeader.style.paddingRight = `${scrollbarWidth}px`;
+    }
+    document.body.style.overflow = 'hidden';
+
+    // Set background elements to inert for accessible focus isolation
+    setBackgroundInert(true);
 
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
 
-    // Focus close button or first interactive element
+    // Focus close button or first interactive element inside modal
     const focusable = getFocusableElements(modal);
     const closeBtn = modal.querySelector('.modal-close-btn');
 
@@ -339,12 +414,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
+
+    // Remove background inert state
+    setBackgroundInert(false);
+
+    // Restore body scroll and layout shift padding
     document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    const siteHeader = document.getElementById('siteHeader');
+    if (siteHeader) siteHeader.style.paddingRight = '';
 
     // Restore focus to opener element
     if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
       setTimeout(() => {
-        lastFocusedTrigger.focus();
+        try {
+          lastFocusedTrigger.focus();
+        } catch (e) {}
         lastFocusedTrigger = null;
       }, 50);
     }
@@ -356,7 +441,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (targetTrigger) {
       const modalKey = targetTrigger.getAttribute('data-modal-target');
       if (modalKey) {
-        window.openModal(modalKey);
+        e.preventDefault();
+        window.openModal(modalKey, targetTrigger);
       }
     }
 
@@ -469,6 +555,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --------------------------------------------------------------------------
   // 10. Contact Form Submission (Validation, Honeypot & FormSubmit AJAX)
+  // Control visibility ONLY via .success / .error classes (no inline display toggles)
+  // Verify result.success === 'true' or true
   // --------------------------------------------------------------------------
   const contactForm = document.getElementById('contactForm');
   const formFeedback = document.getElementById('formFeedback');
@@ -534,9 +622,21 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isNameValid || !isEmailValid || !isSubjectValid || !isMessageValid) {
         if (formFeedback) {
           formFeedback.className = 'form-feedback-msg error';
-          formFeedback.textContent = 'Please fill out all required fields with valid information.';
+          formFeedback.innerHTML = `
+            <svg class="feedback-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span>Please fill out all required fields with valid information.</span>
+          `;
         }
         return;
+      }
+
+      // Reset feedback to hidden state by class only
+      if (formFeedback) {
+        formFeedback.className = 'form-feedback-msg';
       }
 
       // Enter loading state
@@ -545,16 +645,17 @@ document.addEventListener('DOMContentLoaded', () => {
         formSubmitBtn.setAttribute('disabled', 'true');
       }
 
-      if (formFeedback) {
-        formFeedback.className = 'form-feedback-msg';
-        formFeedback.style.display = 'none';
-      }
+      const rawSubject = subjectInput.value.trim();
+      const rawMessage = messageInput.value.trim();
 
       const formData = {
         name: nameInput.value.trim(),
         email: emailInput.value.trim(),
-        _subject: subjectInput.value.trim(),
-        message: messageInput.value.trim()
+        _subject: `[Portfolio Contact] ${rawSubject}`,
+        message: rawMessage,
+        _template: 'table',
+        _captcha: 'false',
+        _honey: honeypot ? honeypot.value : ''
       };
 
       try {
@@ -567,25 +668,39 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(formData)
         });
 
-        if (response.ok) {
+        const result = await response.json();
+
+        if (response.ok && (result.success === 'true' || result.success === true)) {
           contactForm.reset();
           if (formFeedback) {
             formFeedback.className = 'form-feedback-msg success';
-            formFeedback.textContent = 'Thank you! Your message has been sent successfully to sahilkhot1152005@gmail.com. I will get back to you shortly.';
+            formFeedback.innerHTML = `
+              <svg class="feedback-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span>Thank you! Your message has been sent successfully to sahilkhot1152005@gmail.com. I will get back to you shortly.</span>
+            `;
           }
           showToast('Message sent successfully!');
         } else {
-          throw new Error('FormSubmit responded with error');
+          throw new Error((result && result.message) || 'FormSubmit returned unsuccessful response');
         }
       } catch (error) {
-        // Fallback to mailto link
+        // Fallback to mailto link with inline error styling
         if (formFeedback) {
           formFeedback.className = 'form-feedback-msg error';
           formFeedback.innerHTML = `
-            Could not dispatch message automatically. Please click 
-            <a href="mailto:sahilkhot1152005@gmail.com?subject=${encodeURIComponent(formData._subject)}&body=${encodeURIComponent(formData.message)}" style="text-decoration:underline; font-weight:600; color:inherit;">
-              here to send directly via your email client
-            </a>.
+            <svg class="feedback-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span>Could not dispatch message automatically. Please click 
+              <a href="mailto:sahilkhot1152005@gmail.com?subject=${encodeURIComponent('[Portfolio Contact] ' + rawSubject)}&body=${encodeURIComponent(rawMessage)}" style="text-decoration:underline; font-weight:600; color:inherit;">
+                here to send directly via your email client &rarr;
+              </a>
+            </span>
           `;
         }
       } finally {

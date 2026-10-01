@@ -4,11 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sahil Khot | Software Engineer &amp; Full-Stack Developer</title>
-  <meta name="description" content="Portfolio of Sahil Khot — Computer Engineering student (CGPA 9.18), MERN Stack Intern at Anvistar, 450+ LeetCode problems solved in Java, and creator of SolarSense AI, Project Match, and Alaybee Sports." />
-  <meta name="keywords" content="Sahil Khot, Software Engineer, Full-Stack Developer, MERN Stack, React, Node.js, MongoDB, LeetCode, Java, SolarSense AI, Project Match, Alaybee Sports" />
+  <meta name="description" content="Portfolio of Sahil Khot — 4th-year B.Tech Computer Engineering student (CGPA 9.18), MERN Stack Intern at Anvistar, 450+ LeetCode problems solved in Java, and creator of SolarSense AI, Project Match, and Alaybee Sports." />
+  <meta name="keywords" content="Sahil Khot, Software Engineer, Full-Stack Developer, MERN Stack, React, Node.js, Express, MongoDB, Java, LeetCode, SolarSense AI, Project Match, Alaybee Sports" />
   <meta name="author" content="Sahil Khot" />
   <meta name="theme-color" content="#090d16" />
   <link rel="canonical" href="https://sahil-khot.github.io/Portfolio/" />
+
+  <!-- Immediate Theme Initializer: Eliminates Theme Flash Before First Paint -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('portfolio-theme');
+        var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', theme === 'light' ? '#f8fafc' : '#090d16');
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 
   <!-- Favicon: Clean SVG with initials SK -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%23818cf8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230f172a'/%3E%3Ctext x='50%25' y='54%25' font-family='sans-serif' font-weight='800' font-size='28' fill='url(%23g)' text-anchor='middle' dominant-baseline='middle'%3ESK%3C/text%3E%3C/svg%3E" />
@@ -17,14 +32,20 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sahil-khot.github.io/Portfolio/" />
   <meta property="og:title" content="Sahil Khot | Software Engineer &amp; Full-Stack Developer" />
-  <meta property="og:description" content="Computer Engineering student (CGPA 9.18), MERN Stack Intern at Anvistar, 450+ LeetCode problems solved in Java, builder of SolarSense AI, Project Match, and Alaybee Sports." />
+  <meta property="og:description" content="4th-year B.Tech Computer Engineering student (CGPA 9.18), MERN Stack Intern at Anvistar, 450+ LeetCode problems in Java, builder of SolarSense AI, Project Match, and Alaybee Sports." />
   <meta property="og:image" content="https://sahil-khot.github.io/Portfolio/Profile.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Sahil Khot — Software Engineer &amp; Full-Stack Developer" />
 
   <!-- Twitter Card Metadata -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Sahil Khot | Software Engineer &amp; Full-Stack Developer" />
-  <meta name="twitter:description" content="Computer Engineering student (CGPA 9.18), MERN Stack Intern at Anvistar, 450+ LeetCode problems solved in Java, builder of SolarSense AI, Project Match, and Alaybee Sports." />
+  <meta name="twitter:description" content="4th-year B.Tech Computer Engineering student (CGPA 9.18), MERN Stack Intern at Anvistar, 450+ LeetCode problems in Java, builder of SolarSense AI, Project Match, and Alaybee Sports." />
   <meta name="twitter:image" content="https://sahil-khot.github.io/Portfolio/Profile.jpg" />
+
+  <!-- Preload Critical Above-The-Fold Profile Asset -->
+  <link rel="preload" as="image" href="Profile.webp" type="image/webp" fetchpriority="high" />
 
   <!-- Structured Data: JSON-LD Person Schema -->
   <script type="application/ld+json">
@@ -62,7 +83,7 @@
 </head>
 <body>
 
-  <!-- Accessible Skip to Content Link -->
+  <!-- Accessible Skip Link -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- Top Scroll Progress Indicator -->
@@ -90,7 +111,7 @@
 
         <div class="nav-actions">
           <!-- Theme Toggle -->
-          <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark color themes" title="Toggle theme">
+          <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark themes" title="Toggle theme">
             <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
               <circle cx="12" cy="12" r="5"></circle>
               <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -107,7 +128,7 @@
             </svg>
           </button>
 
-          <!-- Resume Download Button -->
+          <!-- Resume Button -->
           <a href="Sahil_Khot_Resume.pdf" target="_blank" download="Sahil_Khot_Resume.pdf" class="btn btn-secondary btn-sm nav-resume-btn" aria-label="Download Sahil Khot Resume PDF">
             <svg class="icon-stroke" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -117,7 +138,7 @@
             <span>Resume</span>
           </a>
 
-          <!-- Mobile Menu Hamburger -->
+          <!-- Mobile Hamburger Toggle -->
           <button type="button" class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navMenu">
             <svg class="hamburger-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
               <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -158,7 +179,8 @@
 
             <div class="hero-role-wrapper">
               <span class="hero-role-prefix">I am a&nbsp;</span>
-              <span class="hero-role-text" id="roleRotator">Full-Stack Developer (MERN)</span>
+              <span class="sr-only">Full-Stack Developer (MERN)</span>
+              <span class="hero-role-text" id="roleRotator" aria-hidden="true">Full-Stack Developer (MERN)</span>
               <span class="role-cursor" aria-hidden="true">|</span>
             </div>
 
@@ -299,7 +321,9 @@
                   <span class="dot dot-green"></span>
                 </div>
                 <div class="browser-address">solar-sense-ai-client.vercel.app</div>
-                <div class="browser-badge">Click for Details</div>
+                <button type="button" class="browser-cta-btn" data-modal-target="solarsense" aria-label="View SolarSense AI architecture details">
+                  View Details &rarr;
+                </button>
               </div>
               <div class="browser-viewport">
                 <picture>
@@ -380,7 +404,9 @@
                   <span class="dot dot-green"></span>
                 </div>
                 <div class="browser-address">project-match-client-virid.vercel.app</div>
-                <div class="browser-badge">Click for Details</div>
+                <button type="button" class="browser-cta-btn" data-modal-target="projectmatch" aria-label="View Project Match architecture details">
+                  View Details &rarr;
+                </button>
               </div>
               <div class="browser-viewport">
                 <picture>
@@ -434,6 +460,7 @@
                 <span class="tech-chip">Express.js</span>
                 <span class="tech-chip">MongoDB</span>
                 <span class="tech-chip">JWT Auth</span>
+                <span class="tech-chip">REST APIs</span>
               </div>
 
               <!-- Action Buttons -->
@@ -462,7 +489,9 @@
                   <span class="dot dot-green"></span>
                 </div>
                 <div class="browser-address">alaybee-sports.vercel.app</div>
-                <div class="browser-badge">Click for Details</div>
+                <button type="button" class="browser-cta-btn" data-modal-target="alaybee" aria-label="View Alaybee Sports architecture details">
+                  View Details &rarr;
+                </button>
               </div>
               <div class="browser-viewport">
                 <picture>
@@ -516,6 +545,8 @@
                 <span class="tech-chip">Express.js</span>
                 <span class="tech-chip">MongoDB Atlas</span>
                 <span class="tech-chip">JWT Auth</span>
+                <span class="tech-chip">REST APIs</span>
+                <span class="tech-chip">Context API</span>
               </div>
 
               <!-- Action Buttons -->
@@ -578,13 +609,13 @@
 
               <ul class="timeline-points">
                 <li>
-                  <strong>Full-Stack Architecture:</strong> Engineered responsive web modules and end-to-end user workflows using <strong>React.js, Node.js, Express.js, and MongoDB</strong>, delivering the <strong>Alaybee Sports</strong> platform.
+                  <strong>Full-Stack Architecture:</strong> Engineered responsive web modules and user flows using <strong>React.js, Node.js, Express.js, and MongoDB</strong>, delivering the <strong>Alaybee Sports</strong> athletic e-commerce platform.
                 </li>
                 <li>
-                  <strong>RESTful API Services:</strong> Designed performant REST endpoints with structured request validation, error-handling middleware, and reliable client-server integration.
+                  <strong>RESTful API Services:</strong> Designed performant REST endpoints with structured request validation, error-handling middleware, and client-server integration.
                 </li>
                 <li>
-                  <strong>Database Operations:</strong> Modeled MongoDB document schemas, implemented indexing for key queries, and performed CRUD operations ensuring transactional integrity.
+                  <strong>Database Operations:</strong> Managed MongoDB document schemas, indexing strategies, and CRUD database operations ensuring transactional consistency.
                 </li>
                 <li>
                   <strong>Testing &amp; Code Quality:</strong> Participated in sprint planning, code reviews, debugging cross-browser UI issues, and testing API payloads with Postman.
@@ -612,7 +643,7 @@
           <span class="section-label">03. Toolset</span>
           <h2 class="section-title">Technical Skills</h2>
           <p class="section-subtitle">
-            Core technologies, languages, and development tools leveraged across engineering workflows.
+            Core technologies, programming languages, and engineering tools leveraged across development workflows.
           </p>
         </div>
 
@@ -634,16 +665,15 @@
               </div>
             </div>
             <p class="bento-desc">
-              End-to-end full-stack engineering with modular client components, stateless RESTful APIs, and document-oriented MongoDB persistence.
+              End-to-end full-stack engineering with responsive React client modules, stateless RESTful Express APIs, and document-oriented MongoDB persistence.
             </p>
             <div class="bento-chips-wrap">
               <span class="bento-chip bento-chip-highlight">React.js</span>
               <span class="bento-chip bento-chip-highlight">Node.js</span>
               <span class="bento-chip bento-chip-highlight">Express.js</span>
-              <span class="bento-chip bento-chip-highlight">MongoDB Atlas</span>
-              <span class="bento-chip">Mongoose ODM</span>
+              <span class="bento-chip bento-chip-highlight">MongoDB</span>
+              <span class="bento-chip">RESTful APIs</span>
               <span class="bento-chip">JWT Authentication</span>
-              <span class="bento-chip">RESTful API Design</span>
             </div>
           </div>
 
@@ -663,7 +693,7 @@
             </div>
             <div class="bento-chips-wrap">
               <span class="bento-chip bento-chip-highlight">Java (Core &amp; OOP)</span>
-              <span class="bento-chip">JavaScript (ES6+)</span>
+              <span class="bento-chip bento-chip-highlight">JavaScript (ES6+)</span>
               <span class="bento-chip">SQL</span>
               <span class="bento-chip">Python (Basics)</span>
             </div>
@@ -685,12 +715,12 @@
               </div>
             </div>
             <div class="bento-chips-wrap">
-              <span class="bento-chip">React.js</span>
+              <span class="bento-chip bento-chip-highlight">React.js</span>
               <span class="bento-chip">Vite</span>
               <span class="bento-chip">Tailwind CSS</span>
               <span class="bento-chip">Bootstrap 5</span>
-              <span class="bento-chip">HTML5 &amp; CSS3</span>
-              <span class="bento-chip">Responsive Design Systems</span>
+              <span class="bento-chip">HTML5</span>
+              <span class="bento-chip">Vanilla CSS3</span>
             </div>
           </div>
 
@@ -706,14 +736,12 @@
               </div>
               <div>
                 <span class="bento-kicker">Storage</span>
-                <h3 class="bento-title">Database Management</h3>
+                <h3 class="bento-title">Databases</h3>
               </div>
             </div>
             <div class="bento-chips-wrap">
-              <span class="bento-chip">MongoDB (Atlas)</span>
+              <span class="bento-chip bento-chip-highlight">MongoDB</span>
               <span class="bento-chip">MySQL</span>
-              <span class="bento-chip">Indexing &amp; Aggregations</span>
-              <span class="bento-chip">Schema Normalization</span>
             </div>
           </div>
 
@@ -726,17 +754,16 @@
                 </svg>
               </div>
               <div>
-                <span class="bento-kicker">Workflow &amp; Foundation</span>
+                <span class="bento-kicker">Tools &amp; Foundations</span>
                 <h3 class="bento-title">Developer Tools &amp; Concepts</h3>
               </div>
             </div>
             <div class="bento-chips-wrap">
-              <span class="bento-chip">Git &amp; GitHub</span>
+              <span class="bento-chip bento-chip-highlight">Git &amp; GitHub</span>
+              <span class="bento-chip bento-chip-highlight">Data Structures &amp; Algorithms</span>
               <span class="bento-chip">Postman</span>
               <span class="bento-chip">VS Code</span>
-              <span class="bento-chip">Data Structures &amp; Algorithms</span>
               <span class="bento-chip">Machine Learning Basics</span>
-              <span class="bento-chip">REST Architecture</span>
             </div>
           </div>
 
@@ -751,7 +778,7 @@
           <span class="section-label">04. Problem Solving</span>
           <h2 class="section-title">Data Structures &amp; Algorithms</h2>
           <p class="section-subtitle">
-            Asymptotic efficiency and data structures mastered through disciplined algorithmic problem solving in Java.
+            Disciplined competitive programming and algorithmic problem solving in Java focused on asymptotic efficiency.
           </p>
         </div>
 
@@ -833,19 +860,19 @@
           <span class="section-label">05. Background</span>
           <h2 class="section-title">About Me</h2>
           <p class="section-subtitle">
-            Engineering background, technical mindset, and collaborative approach.
+            Engineering background, technical mindset, and full-stack development experience.
           </p>
         </div>
 
         <div class="about-split-grid">
           <!-- Story Narrative -->
           <div class="about-narrative-card" data-reveal>
-            <h3 class="about-card-title">Driven by Engineering First Principles</h3>
+            <h3 class="about-card-title">Full-Stack Development &amp; Algorithmic Practice</h3>
             <p>
-              I am a 4th-year Computer Engineering undergraduate at <strong>Vidya Pratishthan’s Kamalnayan Bajaj Institute of Engineering and Technology, Baramati</strong>, maintaining a <strong>9.18 CGPA</strong>. My software journey pairs rigorous academic foundations with practical, product-minded full-stack development.
+              I am a 4th-year B.Tech Computer Engineering student (2023–2027) at <strong>Vidya Pratishthan’s Kamalnayan Bajaj Institute of Engineering and Technology, Baramati</strong>, maintaining a <strong>9.18 CGPA</strong>. My technical focus centers on practical, performant web applications built with the MERN stack.
             </p>
             <p>
-              Whether engineering independent platforms like <strong>SolarSense AI</strong> and <strong>Project Match</strong> or building e-commerce modules during my <strong>Anvistar</strong> internship, I focus on clean component architectures, robust RESTful APIs, and scalable database schemas. My daily problem-solving habit in Java keeps my algorithmic reasoning sharp and performance-conscious.
+              Along with engineering independent platforms like <strong>SolarSense AI</strong> and <strong>Project Match</strong>, I developed athletic e-commerce modules during my <strong>Anvistar</strong> internship. My daily problem-solving routine with <strong>450+ LeetCode problems</strong> in Java ensures strong algorithmic thinking and efficient code.
             </p>
             <div class="about-signature-row">
               <span class="signature-tag">Baramati &bull; Pune, Maharashtra</span>
@@ -862,9 +889,9 @@
                 </svg>
               </div>
               <div>
-                <h4 class="highlight-title">Full-Stack Craftsmanship</h4>
+                <h4 class="highlight-title">Full-Stack Development</h4>
                 <p class="highlight-text">
-                  Proficient across the MERN stack with modern Vite tooling, clean REST contracts, and disciplined MongoDB modeling.
+                  Proficient across the MERN stack with modern Vite tooling, clean RESTful APIs, and structured MongoDB document schemas.
                 </p>
               </div>
             </div>
@@ -877,9 +904,9 @@
                 </svg>
               </div>
               <div>
-                <h4 class="highlight-title">Algorithmic Discipline</h4>
+                <h4 class="highlight-title">Algorithmic Problem Solving</h4>
                 <p class="highlight-text">
-                  Over 450 verified LeetCode solutions in Java and a 100 Days Badge, applying optimal time and space complexity to real code.
+                  450+ verified LeetCode solutions in Java and a 100 Days Badge, applying optimal time and space complexity.
                 </p>
               </div>
             </div>
@@ -892,9 +919,9 @@
                 </svg>
               </div>
               <div>
-                <h4 class="highlight-title">Academic &amp; Professional Rigor</h4>
+                <h4 class="highlight-title">Academic &amp; Professional Foundation</h4>
                 <p class="highlight-text">
-                  98.62 percentile in MHT-CET, 90.17% in XII, and active internship engineering at Anvistar translating theory into production value.
+                  98.62 percentile in MHT-CET, 90.17% in Class XII, 98.80% in Class X, and MERN internship experience at Anvistar.
                 </p>
               </div>
             </div>
@@ -923,7 +950,9 @@
               <span class="milestone-year">LeetCode</span>
             </div>
             <div class="milestone-main">
-              <div class="milestone-number">100 Days</div>
+              <div class="milestone-pill-wrap">
+                <span class="milestone-pill">100 Days</span>
+              </div>
               <h3 class="milestone-title">LeetCode Badge Earned</h3>
               <p class="milestone-desc">
                 Awarded for sustained daily problem-solving discipline and continuous algorithmic practice in Java.
@@ -934,14 +963,16 @@
           <!-- Milestone 2: MHT-CET -->
           <div class="milestone-card" data-reveal>
             <div class="milestone-badge-top">
-              <span class="badge badge-cyan">Competitive Examination</span>
+              <span class="badge badge-cyan">Entrance Examination</span>
               <span class="milestone-year">2023</span>
             </div>
             <div class="milestone-main">
-              <div class="milestone-number">98.62 %ile</div>
-              <h3 class="milestone-title">MHT-CET State Percentile</h3>
+              <div class="milestone-pill-wrap">
+                <span class="milestone-pill">98.62 %ile</span>
+              </div>
+              <h3 class="milestone-title">MHT-CET 2023</h3>
               <p class="milestone-desc">
-                Ranked in the top percentile among over 300,000 engineering candidates across Maharashtra.
+                98.62 percentile, State Common Entrance Examination for Engineering Admissions, 2023.
               </p>
             </div>
           </div>
@@ -953,10 +984,12 @@
               <span class="milestone-year">8th Standard</span>
             </div>
             <div class="milestone-main">
-              <div class="milestone-number">Qualified</div>
-              <h3 class="milestone-title">NMMS Scholarship Recipient</h3>
+              <div class="milestone-pill-wrap">
+                <span class="milestone-pill">Qualified</span>
+              </div>
+              <h3 class="milestone-title">NMMS Examination — Qualified (8th Standard)</h3>
               <p class="milestone-desc">
-                National Means-cum-Merit Scholarship Examination merit recipient identifying early academic and mathematical aptitude.
+                Qualified in 8th standard.
               </p>
             </div>
           </div>
@@ -972,22 +1005,22 @@
           <span class="section-label">07. Academics</span>
           <h2 class="section-title">Education &amp; Credentials</h2>
           <p class="section-subtitle">
-            Academic trajectory and technical certifications in Baramati and Pune.
+            Academic trajectory and certifications in Baramati and Pune.
           </p>
         </div>
 
         <!-- Vertical Timeline for Education -->
         <div class="edu-timeline" data-reveal>
           
-          <!-- B.Tech -->
-          <div class="edu-timeline-node">
+          <!-- B.Tech (Highlighted Primary) -->
+          <div class="edu-timeline-node edu-node-featured">
             <div class="edu-node-point"></div>
-            <div class="edu-card">
+            <div class="edu-card edu-card-featured">
               <div class="edu-header-row">
-                <div>
-                  <span class="badge badge-cyan">Undergraduate Degree</span>
+                <div class="edu-main-info">
+                  <span class="badge badge-cyan">Undergraduate Degree &bull; Primary</span>
                   <h3 class="edu-degree">B.Tech in Computer Engineering</h3>
-                  <div class="edu-institution">Vidya Pratishthan’s Kamalnayan Bajaj Institute of Engineering and Technology, Baramati</div>
+                  <div class="edu-institution">Vidya Pratishthan's Kamalnayan Bajaj Institute of Engineering and Technology, Baramati</div>
                 </div>
                 <div class="edu-score-box">
                   <span class="edu-score-val">9.18</span>
@@ -998,38 +1031,38 @@
             </div>
           </div>
 
-          <!-- HSC XII -->
+          <!-- Class XII -->
           <div class="edu-timeline-node">
             <div class="edu-node-point"></div>
             <div class="edu-card">
               <div class="edu-header-row">
-                <div>
+                <div class="edu-main-info">
                   <span class="badge badge-indigo">Higher Secondary Certificate</span>
-                  <h3 class="edu-degree">Class XII (HSC Science)</h3>
-                  <div class="edu-institution">Vidya Pratishthan’s Arts, Science &amp; Commerce College, Baramati</div>
+                  <h3 class="edu-degree">Class XII</h3>
+                  <div class="edu-institution">Vidya Pratishthan's Arts, Science and Commerce College, Baramati</div>
                 </div>
                 <div class="edu-score-box">
                   <span class="edu-score-val">90.17%</span>
-                  <span class="edu-score-lbl">Maharashtra State Board</span>
+                  <span class="edu-score-lbl">Percentage</span>
                   <span class="edu-period">2023</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- SSC X -->
+          <!-- Class X -->
           <div class="edu-timeline-node">
             <div class="edu-node-point"></div>
             <div class="edu-card">
               <div class="edu-header-row">
-                <div>
+                <div class="edu-main-info">
                   <span class="badge badge-indigo">Secondary School Certificate</span>
-                  <h3 class="edu-degree">Class X (SSC)</h3>
+                  <h3 class="edu-degree">Class X</h3>
                   <div class="edu-institution">New English School, Dorlewadi</div>
                 </div>
                 <div class="edu-score-box">
                   <span class="edu-score-val">98.80%</span>
-                  <span class="edu-score-lbl">Maharashtra State Board</span>
+                  <span class="edu-score-lbl">Percentage</span>
                   <span class="edu-period">2021</span>
                 </div>
               </div>
@@ -1038,10 +1071,10 @@
 
         </div>
 
-        <!-- Technical Certifications Grid -->
+        <!-- Certifications Block -->
         <div class="certifications-block" data-reveal>
           <div class="cert-block-header">
-            <h3 class="cert-block-title">Verified Technical Certifications</h3>
+            <h3 class="cert-block-title">Certifications</h3>
           </div>
           <div class="certs-grid">
             <div class="cert-card">
@@ -1095,7 +1128,7 @@
           <span class="section-label">08. Inquiries</span>
           <h2 class="section-title">Get in Touch</h2>
           <p class="section-subtitle">
-            Let's discuss software engineering opportunities, internships, or technical collaborations.
+            Open to software engineering roles and internships (MERN Stack &amp; Full-Stack Development). Let's connect.
           </p>
         </div>
 
@@ -1137,6 +1170,19 @@
               </div>
             </div>
 
+            <div class="contact-channel-card contact-looking-card">
+              <div class="channel-icon-box">
+                <svg class="icon-stroke" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <div class="channel-text-wrap">
+                <span class="channel-label">What I'm Looking For</span>
+                <span class="channel-value">Software engineering roles &amp; internships</span>
+              </div>
+            </div>
+
             <!-- Merged Compact Resume Card -->
             <div class="compact-resume-card">
               <div class="resume-card-header">
@@ -1151,7 +1197,7 @@
                 </div>
                 <div>
                   <h4 class="resume-card-title">Software Engineering Resume</h4>
-                  <p class="resume-card-sub">PDF &bull; Updated October 2026 &bull; MERN &amp; Java</p>
+                  <p class="resume-card-sub">PDF Format &bull; Full-Stack (MERN) &amp; Java</p>
                 </div>
               </div>
               <div class="resume-card-actions">
@@ -1171,11 +1217,11 @@
 
           </div>
 
-          <!-- Contact Right: Form with Validation & Feedback -->
+          <!-- Contact Right: Form with Clean CSS Feedback -->
           <div class="contact-form-card" data-reveal>
             <form id="contactForm" novalidate aria-label="Direct message form">
               <!-- Honeypot anti-spam field -->
-              <input type="text" name="_gotcha" id="formHoneypot" style="display:none !important;" tabindex="-1" autocomplete="off" />
+              <input type="text" name="_honey" id="formHoneypot" style="display:none !important;" tabindex="-1" autocomplete="off" />
 
               <div id="formFeedback" class="form-feedback-msg" role="status" aria-live="polite"></div>
 
@@ -1231,10 +1277,10 @@
       <div class="footer-left">
         <div class="footer-brand">Sahil Khot<span class="nav-brand-dot">.</span></div>
         <div class="footer-copy">
-          Computer Engineering Undergraduate &bull; Full-Stack Engineer (MERN)
+          4th-Year Computer Engineering Undergraduate &bull; Full-Stack Developer (MERN)
         </div>
         <div class="footer-status-line">
-          <span class="status-dot"></span> Available for Software Engineering Opportunities
+          <span class="status-dot"></span> 4th-Year Computer Engineering &bull; Open to Software Engineering Roles
         </div>
       </div>
 
@@ -1493,6 +1539,7 @@
             <span class="tech-chip">Express.js</span>
             <span class="tech-chip">MongoDB Atlas</span>
             <span class="tech-chip">JWT Auth</span>
+            <span class="tech-chip">REST APIs</span>
             <span class="tech-chip">Context API</span>
           </div>
         </div>
