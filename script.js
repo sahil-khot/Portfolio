@@ -1,27 +1,124 @@
 // ==========================================================================
-// SAHIL KHOT — PROFESSIONAL DEVELOPER PORTFOLIO
-// Fast, Lightweight, Fully Accessible, Vanilla JavaScript
+// SAHIL KHOT — SENIOR DEVELOPER & RECRUITER-READY PORTFOLIO
+// Fast, Accessible, Vanilla ES6+ JavaScript
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+
   // --------------------------------------------------------------------------
-  // 1. Mobile Menu Functionality & Accessible Toggle
+  // 1. Theme Management (Light/Dark Mode with localStorage & System Sync)
+  // --------------------------------------------------------------------------
+  const themeToggle = document.getElementById('themeToggle');
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+  function getSavedTheme() {
+    try {
+      const saved = localStorage.getItem('portfolio-theme');
+      if (saved === 'light' || saved === 'dark') return saved;
+    } catch (e) {
+      // localStorage disabled / blocked in private browsing
+    }
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', theme === 'light' ? '#f8fafc' : '#090d16');
+    }
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-label', `Switch to ${theme === 'light' ? 'dark' : 'light'} theme`);
+    }
+  }
+
+  // Initialize theme
+  const initialTheme = getSavedTheme();
+  applyTheme(initialTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      try {
+        localStorage.setItem('portfolio-theme', next);
+      } catch (e) {}
+    });
+  }
+
+  // Listen to OS theme change if user hasn't explicitly set localStorage
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+      try {
+        if (!localStorage.getItem('portfolio-theme')) {
+          applyTheme(e.matches ? 'light' : 'dark');
+        }
+      } catch (err) {}
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // 2. Scroll Progress Bar & Back to Top Button
+  // --------------------------------------------------------------------------
+  const scrollProgress = document.getElementById('scrollProgress');
+  const backToTopBtn = document.getElementById('backToTop');
+
+  function updateScrollMetrics() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progressPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    if (scrollProgress) {
+      scrollProgress.style.width = `${progressPercent}%`;
+    }
+
+    if (backToTopBtn) {
+      if (scrollTop > 450) {
+        backToTopBtn.style.opacity = '1';
+        backToTopBtn.style.pointerEvents = 'auto';
+      } else {
+        backToTopBtn.style.opacity = '0';
+        backToTopBtn.style.pointerEvents = 'none';
+      }
+    }
+  }
+
+  if (backToTopBtn) {
+    backToTopBtn.style.opacity = '0';
+    backToTopBtn.style.pointerEvents = 'none';
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  window.addEventListener('scroll', updateScrollMetrics, { passive: true });
+  updateScrollMetrics();
+
+  // --------------------------------------------------------------------------
+  // 3. Mobile Navigation Menu Drawer & Accessible Toggle
   // --------------------------------------------------------------------------
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('navMenu');
+  const navBackdrop = document.getElementById('navBackdrop');
 
-  function openMenu() {
+  function openMobileNav() {
     if (!navMenu || !navToggle) return;
     navMenu.classList.add('open');
+    navToggle.classList.add('open');
     navToggle.setAttribute('aria-expanded', 'true');
     navToggle.setAttribute('aria-label', 'Close navigation menu');
+    if (navBackdrop) navBackdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
-  function closeMenu() {
+  function closeMobileNav() {
     if (!navMenu || !navToggle) return;
     navMenu.classList.remove('open');
+    navToggle.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Open navigation menu');
+    if (navBackdrop) navBackdrop.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
   if (navToggle && navMenu) {
@@ -29,35 +126,29 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       const isOpen = navMenu.classList.contains('open');
       if (isOpen) {
-        closeMenu();
+        closeMobileNav();
       } else {
-        openMenu();
+        openMobileNav();
       }
     });
 
-    // Close when clicking any nav item
+    if (navBackdrop) {
+      navBackdrop.addEventListener('click', closeMobileNav);
+    }
+
     navMenu.querySelectorAll('.nav-link').forEach((link) => {
-      link.addEventListener('click', () => {
-        closeMenu();
-      });
-    });
-
-    // Close when clicking outside of navMenu
-    document.addEventListener('click', (e) => {
-      if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && e.target !== navToggle) {
-        closeMenu();
-      }
+      link.addEventListener('click', closeMobileNav);
     });
   }
 
   // --------------------------------------------------------------------------
-  // 2. Active Nav Link on Scroll
+  // 4. Scroll-Spy (Accurate Nav Tracking with aria-current)
   // --------------------------------------------------------------------------
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-menu .nav-link');
 
-  function updateActiveNav() {
-    const scrollPos = window.scrollY + 140;
+  function updateActiveNavSection() {
+    const scrollPos = window.scrollY + 120;
 
     sections.forEach((section) => {
       const top = section.offsetTop;
@@ -66,22 +157,146 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (scrollPos >= top && scrollPos < top + height) {
         navLinks.forEach((link) => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${id}`) {
+          const href = link.getAttribute('href');
+          if (href === `#${id}`) {
             link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
+          } else {
+            link.classList.remove('active');
+            link.removeAttribute('aria-current');
           }
         });
       }
     });
   }
 
-  window.addEventListener('scroll', updateActiveNav, { passive: true });
-  updateActiveNav();
+  window.addEventListener('scroll', updateActiveNavSection, { passive: true });
+  updateActiveNavSection();
 
   // --------------------------------------------------------------------------
-  // 3. Modal Dialog Functionality with Focus Trap & Focus Restoration
+  // 5. Hero Dynamic Typed Role Rotator (With Reduced Motion Fallback)
   // --------------------------------------------------------------------------
-  let lastFocusedElement = null;
+  const roleRotator = document.getElementById('roleRotator');
+  const roles = [
+    'Full-Stack Developer (MERN)',
+    'Software Engineer',
+    'Algorithmic Problem Solver'
+  ];
+
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (roleRotator && !prefersReducedMotion) {
+    let roleIdx = 0;
+    let charIdx = roles[0].length;
+    let isDeleting = false;
+    let typingSpeed = 90;
+
+    function typeLoop() {
+      const currentRole = roles[roleIdx];
+
+      if (isDeleting) {
+        roleRotator.textContent = currentRole.substring(0, charIdx - 1);
+        charIdx--;
+        typingSpeed = 45;
+      } else {
+        roleRotator.textContent = currentRole.substring(0, charIdx + 1);
+        charIdx++;
+        typingSpeed = 85;
+      }
+
+      if (!isDeleting && charIdx === currentRole.length) {
+        isDeleting = true;
+        typingSpeed = 2400; // Pause at full word
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+        typingSpeed = 400; // Pause before next word
+      }
+
+      setTimeout(typeLoop, typingSpeed);
+    }
+
+    // Start typing after initial pause
+    setTimeout(typeLoop, 2000);
+  }
+
+  // --------------------------------------------------------------------------
+  // 6. Credibility Numbers Animated Count-Up (Once on Scroll)
+  // --------------------------------------------------------------------------
+  const credibilityStrip = document.getElementById('credibilityStrip');
+  let hasCountedUp = false;
+
+  function runCountUp() {
+    if (hasCountedUp || prefersReducedMotion) return;
+    hasCountedUp = true;
+
+    const countEls = document.querySelectorAll('.cred-value[data-count]');
+    countEls.forEach((el) => {
+      const target = parseFloat(el.getAttribute('data-count'));
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const duration = 1600; // ms
+      const startTime = performance.now();
+
+      function updateNumber(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Easing: easeOutExpo
+        const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const currentVal = (target * ease).toFixed(decimals);
+
+        el.textContent = currentVal;
+
+        if (progress < 1) {
+          requestAnimationFrame(updateNumber);
+        } else {
+          el.textContent = target.toFixed(decimals);
+        }
+      }
+
+      requestAnimationFrame(updateNumber);
+    });
+  }
+
+  if (credibilityStrip && 'IntersectionObserver' in window) {
+    const credObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        runCountUp();
+        credObserver.disconnect();
+      }
+    }, { threshold: 0.3 });
+
+    credObserver.observe(credibilityStrip);
+  } else {
+    runCountUp();
+  }
+
+  // --------------------------------------------------------------------------
+  // 7. Scroll-Reveal Animations (IntersectionObserver)
+  // --------------------------------------------------------------------------
+  const revealElements = document.querySelectorAll('[data-reveal]');
+
+  if ('IntersectionObserver' in window && !prefersReducedMotion) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+  } else {
+    revealElements.forEach((el) => el.classList.add('revealed'));
+  }
+
+  // --------------------------------------------------------------------------
+  // 8. Modal Dialog Management (Focus Trap & Restoration)
+  // --------------------------------------------------------------------------
+  let lastFocusedTrigger = null;
 
   function getFocusableElements(container) {
     return Array.from(
@@ -95,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById(`modal-${modalKey}`);
     if (!modal) return;
 
-    lastFocusedElement = document.activeElement;
+    lastFocusedTrigger = document.activeElement;
 
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
@@ -106,9 +321,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = modal.querySelector('.modal-close-btn');
 
     if (closeBtn) {
-      setTimeout(() => closeBtn.focus(), 50);
+      setTimeout(() => closeBtn.focus(), 60);
     } else if (focusable.length > 0) {
-      setTimeout(() => focusable[0].focus(), 50);
+      setTimeout(() => focusable[0].focus(), 60);
     }
   };
 
@@ -127,21 +342,35 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
 
     // Restore focus to opener element
-    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+    if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
       setTimeout(() => {
-        lastFocusedElement.focus();
-        lastFocusedElement = null;
+        lastFocusedTrigger.focus();
+        lastFocusedTrigger = null;
       }, 50);
     }
   };
 
-  // Close modals when clicking backdrop
-  document.querySelectorAll('.modal-overlay').forEach((overlay) => {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        window.closeModal();
+  // Event delegation for opening modals via data-modal-target
+  document.addEventListener('click', (e) => {
+    const targetTrigger = e.target.closest('[data-modal-target]');
+    if (targetTrigger) {
+      const modalKey = targetTrigger.getAttribute('data-modal-target');
+      if (modalKey) {
+        window.openModal(modalKey);
       }
-    });
+    }
+
+    // Closing modal via data-modal-close
+    const closeTrigger = e.target.closest('[data-modal-close]');
+    if (closeTrigger) {
+      const modalKey = closeTrigger.getAttribute('data-modal-close');
+      window.closeModal(modalKey);
+    }
+
+    // Closing modal by clicking backdrop overlay
+    if (e.target.classList.contains('modal-overlay')) {
+      window.closeModal();
+    }
   });
 
   // Handle Tab key trapping inside open modal & ESC closing
@@ -149,16 +378,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const openModalEl = document.querySelector('.modal-overlay.open');
 
     if (e.key === 'Escape') {
-      if (navMenu && navMenu.classList.contains('open')) {
-        closeMenu();
-      }
       if (openModalEl) {
         window.closeModal();
+      }
+      if (navMenu && navMenu.classList.contains('open')) {
+        closeMobileNav();
       }
       return;
     }
 
-    // Modal focus trapping
     if (e.key === 'Tab' && openModalEl) {
       const focusable = getFocusableElements(openModalEl);
       if (focusable.length === 0) {
@@ -166,84 +394,168 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const firstElement = focusable[0];
-      const lastElement = focusable[focusable.length - 1];
+      const firstEl = focusable[0];
+      const lastEl = focusable[focusable.length - 1];
 
       if (e.shiftKey) {
-        // Shift + Tab
-        if (document.activeElement === firstElement) {
+        if (document.activeElement === firstEl) {
           e.preventDefault();
-          lastElement.focus();
+          lastEl.focus();
         }
       } else {
-        // Tab
-        if (document.activeElement === lastElement) {
+        if (document.activeElement === lastEl) {
           e.preventDefault();
-          firstElement.focus();
+          firstEl.focus();
         }
       }
     }
   });
 
-  // Keyboard support for interactive preview cards (Enter or Space to open modal)
-  document.querySelectorAll('.project-preview-wrap[role="button"]').forEach((cardPreview) => {
-    cardPreview.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        cardPreview.click();
+  // --------------------------------------------------------------------------
+  // 9. Copy Email to Clipboard with Toast Notification
+  // --------------------------------------------------------------------------
+  const copyEmailBtn = document.getElementById('copyEmailBtn');
+  const toastContainer = document.getElementById('toastContainer');
+
+  function showToast(message) {
+    if (!toastContainer) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `
+      <svg class="icon-stroke" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" style="color: var(--accent-green);">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span>${message}</span>
+    `;
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(10px)';
+      setTimeout(() => toast.remove(), 300);
+    }, 2800);
+  }
+
+  if (copyEmailBtn) {
+    copyEmailBtn.addEventListener('click', async () => {
+      const email = 'sahilkhot1152005@gmail.com';
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(email);
+        } else {
+          // Fallback for older browsers
+          const temp = document.createElement('textarea');
+          temp.value = email;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          document.body.removeChild(temp);
+        }
+
+        const copyTextSpan = copyEmailBtn.querySelector('.copy-text');
+        if (copyTextSpan) {
+          const original = copyTextSpan.textContent;
+          copyTextSpan.textContent = 'Copied!';
+          setTimeout(() => copyTextSpan.textContent = original, 2000);
+        }
+
+        showToast('Email address copied to clipboard!');
+      } catch (err) {
+        showToast('Failed to copy. Please email sahilkhot1152005@gmail.com');
       }
     });
-  });
+  }
 
   // --------------------------------------------------------------------------
-  // 4. Contact Form - Direct Email Dispatch to Sahil
+  // 10. Contact Form Submission (Validation, Honeypot & FormSubmit AJAX)
   // --------------------------------------------------------------------------
   const contactForm = document.getElementById('contactForm');
-  const formSubmitBtn = document.getElementById('formSubmitBtn');
   const formFeedback = document.getElementById('formFeedback');
+  const formSubmitBtn = document.getElementById('formSubmitBtn');
 
-  if (contactForm && formSubmitBtn && formFeedback) {
+  if (contactForm) {
+    const nameInput = document.getElementById('userName');
+    const emailInput = document.getElementById('userEmail');
+    const subjectInput = document.getElementById('userSubject');
+    const messageInput = document.getElementById('userMessage');
+    const honeypot = document.getElementById('formHoneypot');
+
+    function validateField(input) {
+      const group = input.closest('.form-field-group');
+      if (!group) return true;
+
+      let isValid = true;
+      const val = input.value.trim();
+
+      if (!val) {
+        isValid = false;
+      } else if (input.type === 'email') {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        isValid = emailPattern.test(val);
+      }
+
+      if (isValid) {
+        group.classList.remove('has-error');
+      } else {
+        group.classList.add('has-error');
+      }
+
+      return isValid;
+    }
+
+    [nameInput, emailInput, subjectInput, messageInput].forEach((input) => {
+      if (input) {
+        input.addEventListener('blur', () => validateField(input));
+        input.addEventListener('input', () => {
+          const group = input.closest('.form-field-group');
+          if (group && group.classList.contains('has-error')) {
+            validateField(input);
+          }
+        });
+      }
+    });
+
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const nameInput = document.getElementById('userName');
-      const emailInput = document.getElementById('userEmail');
-      const subjectInput = document.getElementById('userSubject');
-      const messageInput = document.getElementById('userMessage');
-
-      const name = nameInput ? nameInput.value.trim() : '';
-      const email = emailInput ? emailInput.value.trim() : '';
-      const subject = subjectInput ? subjectInput.value.trim() : '';
-      const message = messageInput ? messageInput.value.trim() : '';
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      if (!name) {
-        showFeedback('Please enter your name.', 'error');
-        if (nameInput) nameInput.focus();
-        return;
-      }
-      if (!email || !emailRegex.test(email)) {
-        showFeedback('Please enter a valid email address.', 'error');
-        if (emailInput) emailInput.focus();
-        return;
-      }
-      if (!subject) {
-        showFeedback('Please enter a subject.', 'error');
-        if (subjectInput) subjectInput.focus();
-        return;
-      }
-      if (!message) {
-        showFeedback('Please enter your message.', 'error');
-        if (messageInput) messageInput.focus();
+      // Check anti-spam honeypot
+      if (honeypot && honeypot.value.trim() !== '') {
+        console.warn('Spam submission detected and dropped.');
         return;
       }
 
-      // UI Loading State
-      const originalBtnHTML = formSubmitBtn.innerHTML;
-      formSubmitBtn.disabled = true;
-      formSubmitBtn.innerHTML = 'Sending Message...';
-      showFeedback('Sending your message directly to Sahil...', 'success');
+      // Validate all fields
+      const isNameValid = validateField(nameInput);
+      const isEmailValid = validateField(emailInput);
+      const isSubjectValid = validateField(subjectInput);
+      const isMessageValid = validateField(messageInput);
+
+      if (!isNameValid || !isEmailValid || !isSubjectValid || !isMessageValid) {
+        if (formFeedback) {
+          formFeedback.className = 'form-feedback-msg error';
+          formFeedback.textContent = 'Please fill out all required fields with valid information.';
+        }
+        return;
+      }
+
+      // Enter loading state
+      if (formSubmitBtn) {
+        formSubmitBtn.classList.add('loading');
+        formSubmitBtn.setAttribute('disabled', 'true');
+      }
+
+      if (formFeedback) {
+        formFeedback.className = 'form-feedback-msg';
+        formFeedback.style.display = 'none';
+      }
+
+      const formData = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        _subject: subjectInput.value.trim(),
+        message: messageInput.value.trim()
+      };
 
       try {
         const response = await fetch('https://formsubmit.co/ajax/sahilkhot1152005@gmail.com', {
@@ -252,44 +564,37 @@ document.addEventListener('DOMContentLoaded', () => {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            _subject: `[Portfolio Contact] ${subject}`,
-            message: message,
-            _captcha: 'false',
-            _template: 'table'
-          })
+          body: JSON.stringify(formData)
         });
 
-        const result = await response.json();
-
-        if (response.ok && (result.success === 'true' || result.success === true || result.message)) {
-          showFeedback(`Thank you, ${name}! Your message has been sent directly to Sahil. He will reply to ${email} soon.`, 'success');
+        if (response.ok) {
           contactForm.reset();
+          if (formFeedback) {
+            formFeedback.className = 'form-feedback-msg success';
+            formFeedback.textContent = 'Thank you! Your message has been sent successfully to sahilkhot1152005@gmail.com. I will get back to you shortly.';
+          }
+          showToast('Message sent successfully!');
         } else {
-          throw new Error(result.message || 'Form submission failed');
+          throw new Error('FormSubmit responded with error');
         }
-      } catch (err) {
-        // Fallback: If network or browser blocks endpoint, provide clear direct mailto option
-        const encodedSubject = encodeURIComponent(subject);
-        const encodedBody = encodeURIComponent(`Hi Sahil,\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n---\nSent via Portfolio Contact Form`);
-        const mailtoUrl = `mailto:sahilkhot1152005@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
-
-        showFeedback(
-          'Direct network dispatch failed. Opening your email client to send to sahilkhot1152005@gmail.com...',
-          'error'
-        );
-        window.location.href = mailtoUrl;
+      } catch (error) {
+        // Fallback to mailto link
+        if (formFeedback) {
+          formFeedback.className = 'form-feedback-msg error';
+          formFeedback.innerHTML = `
+            Could not dispatch message automatically. Please click 
+            <a href="mailto:sahilkhot1152005@gmail.com?subject=${encodeURIComponent(formData._subject)}&body=${encodeURIComponent(formData.message)}" style="text-decoration:underline; font-weight:600; color:inherit;">
+              here to send directly via your email client
+            </a>.
+          `;
+        }
       } finally {
-        formSubmitBtn.disabled = false;
-        formSubmitBtn.innerHTML = originalBtnHTML;
+        if (formSubmitBtn) {
+          formSubmitBtn.classList.remove('loading');
+          formSubmitBtn.removeAttribute('disabled');
+        }
       }
     });
-
-    function showFeedback(text, type) {
-      formFeedback.textContent = text;
-      formFeedback.className = `form-feedback-msg ${type}`;
-    }
   }
+
 });

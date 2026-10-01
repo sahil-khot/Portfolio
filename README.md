@@ -141,10 +141,14 @@ Portfolio/
 ├── style.css                   # Custom dark design system (no framework dependencies)
 ├── script.js                   # Accessible modal focus trap, nav tracking & FormSubmit dispatch
 ├── Sahil_Khot_Resume.pdf       # Official software engineering resume
-├── Profile.jpg                 # Profile headshot
+├── Profile.jpg                 # Profile headshot (JPEG)
+├── Profile.webp                # Profile headshot (Optimized WebP)
 ├── solarsense-preview.png      # SolarSense AI application dashboard preview
+├── solarsense-preview.webp     # SolarSense AI preview (Optimized WebP)
 ├── projectmatch-preview.png    # Project Match platform directory preview
+├── projectmatch-preview.webp   # Project Match preview (Optimized WebP)
 ├── alaybee-preview.png         # Alaybee Sports e-commerce storefront preview
+├── alaybee-preview.webp        # Alaybee Sports preview (Optimized WebP)
 └── README.md                   # Repository documentation and technical profile
 ```
 
